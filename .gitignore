@@ -1,0 +1,14 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+/spec/examples.txt
+
+# Ignore assets.
+/public/assets
+/public/uploads
+
+# RubyMine
+.idea

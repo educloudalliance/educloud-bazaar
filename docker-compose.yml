@@ -1,0 +1,21 @@
+version: '2'
+services:
+  website:
+    build: .
+    ports:
+      - '80:80'
+    volumes:
+      - .:/home/app/web:z
+    env_file:
+      - 'docker/env.web'
+  postgres:
+    image: 'postgres:9.5'
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'password'
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+volumes:
+  postgres:
