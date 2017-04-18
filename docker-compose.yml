@@ -8,6 +8,8 @@ services:
       - .:/home/app/web:z
     env_file:
       - 'docker/env.web'
+    depends_on:
+      - postgres
   postgres:
     image: 'postgres:9.5'
     environment:
