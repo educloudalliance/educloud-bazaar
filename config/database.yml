@@ -30,7 +30,7 @@ development: &default
 #  database: db/production.sqlite3
 test:
   <<: *default
-  database: 'educloud_test'
+  url: <%= ENV['DATABASE_URL'] || "postgresql://postgres:password@localhost:5432/educloud_test?encoding=utf8&pool=5&timeout=5000" %>
 
 production:
   <<: *default
