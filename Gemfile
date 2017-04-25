@@ -5,7 +5,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'acts-as-taggable-on', '~> 4.0'
+gem 'paperclip', '~> 5.0.0'
 gem 'pg', '~> 0.20.0'
+gem 'will_paginate', '~> 3.1.0'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 # Use sqlite3 as the database for Active Record
@@ -54,6 +59,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  # gem 'database_cleaner', '~> 1.5'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

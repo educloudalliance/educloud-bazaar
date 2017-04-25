@@ -67,7 +67,8 @@ Metrics/BlockLength:
     - app/controllers/api/v1/defaults.rb
     - app/models/spree/user_decorator.rb
 Metrics/LineLength:
-  Enabled: false
+  Enabled: true
+  Max: 120
 Metrics/MethodLength:
   Max: 20
   Exclude:
