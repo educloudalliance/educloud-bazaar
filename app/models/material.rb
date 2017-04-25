@@ -7,7 +7,7 @@ class Material < ApplicationRecord
   validates :publisher_resource_id, presence: true, uniqueness: true
 
   has_attached_file :image, styles: {thumbnail: '150x150#', standard_resolution: '306x306#', low_resolution: '612x612#'}
-  validates_attachment :image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }
+  validates_attachment :image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] }, size: { less_than: 5.megabytes }
 
-  self.per_page = 3
+  self.per_page = 100
 end

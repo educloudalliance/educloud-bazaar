@@ -20,13 +20,13 @@ module Api
         end
 
         def update
-          @material.tag_list = params[:tags]
+          @material.tag_list = params[:tags] if params[:tags].present?
           render json: {success: 1} if @material.update!(create_params)
         end
 
         def destroy
           @material.destroy!
-          render json: {success: 1} if @material.destroyed?
+          render json: {success: 1}
         end
 
         private

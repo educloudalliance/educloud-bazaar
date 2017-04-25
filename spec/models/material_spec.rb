@@ -10,5 +10,6 @@ RSpec.describe Material, type: :model do
     it { should validate_uniqueness_of :publisher_resource_id }
     it { should have_attached_file :image }
     it { should validate_attachment_content_type(:image).allowing('image/jpeg', 'image/png', 'image/gif') }
+    it { should validate_attachment_size(:image).less_than(5.megabytes) }
   end
 end
