@@ -13,7 +13,7 @@ services:
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'password'
-      DATABASE_URL: 'postgresql://postgres:password@postgres:5432/educloud_test?encoding=utf8&pool=5&timeout=5000'
+      DATABASE_TEST_URL: 'postgresql://postgres:password@postgres:5432/educloud_test?encoding=utf8&pool=5&timeout=5000'
   postgres:
     image: 'postgres:9.5'
     ports:

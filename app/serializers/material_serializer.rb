@@ -1,5 +1,12 @@
 class MaterialSerializer < ActiveModel::Serializer
-  attributes :name, :description, :language, :publisher_resource_id, :publisher_data, :tags, :images
+  attributes :name, :description, :language, :publisher_resource_id, :publisher_data, :metadata, :tags, :images
+  type 'data'
+
+  has_many :metadata do
+    object.metadata.map do |m|
+      "#{m.country}#{m.subject}"
+    end
+  end
 
   def tags
     object.tag_list

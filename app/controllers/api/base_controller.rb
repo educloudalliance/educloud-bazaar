@@ -13,7 +13,21 @@ module Api
     end
 
     def find_material
-      @material = Material.where(publisher_resource_id: params[:id]).first!
+      @material = Material.find_by!(publisher_resource_id: params[:id])
+    end
+
+    def find_metadata
+      metadata = Metadata.where(country: params[:id])
+      raise ActiveRecord::RecordNotFound if metadata.empty?
+      @metadata = metadata_fields_to_array(metadata)
+    end
+
+    def metadata_fields_to_array(collection)
+      hash = {success: 1}
+      hash[:data] = collection.map do |metadata|
+        "#{metadata.country}#{metadata.subject}"
+      end
+      hash
     end
 
     def pagination_dict(collection)

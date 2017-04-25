@@ -20,6 +20,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :controller do
       expect(response).to have_http_status(200)
       expect(response.body).not_to be_empty
       expect(JSON(response.body)['data']['publisher_resource_id']).to eq(publisher_resource_id)
+      expect(JSON(response.body)['data']['metadata'].size).to be > 0
     end
 
     it 'response with record not found' do

@@ -10,24 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170420095735) do
+ActiveRecord::Schema.define(version: 20170424104654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "materials", force: :cascade do |t|
-    t.string   "name",                  limit: 255,              null: false
-    t.text     "description",                                    null: false
-    t.string   "language",                                       null: false
+    t.string   "name",                  limit: 255, null: false
+    t.text     "description",                       null: false
+    t.string   "language",                          null: false
     t.integer  "publisher_resource_id"
     t.text     "publisher_data"
-    t.text     "metadata",                          default: [],              array: true
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+  end
+
+  create_table "materials_metadata", force: :cascade do |t|
+    t.integer  "metadata_id"
+    t.integer  "material_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["material_id"], name: "index_materials_metadata_on_material_id", using: :btree
+    t.index ["metadata_id"], name: "index_materials_metadata_on_metadata_id", using: :btree
+  end
+
+  create_table "metadata", force: :cascade do |t|
+    t.string   "country"
+    t.string   "subject"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", force: :cascade do |t|
