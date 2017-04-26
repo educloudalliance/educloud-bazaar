@@ -9,6 +9,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'paperclip', '~> 5.0.0'
 gem 'pg', '~> 0.20.0'
+gem 'swagger-blocks'
 gem 'will_paginate', '~> 3.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
