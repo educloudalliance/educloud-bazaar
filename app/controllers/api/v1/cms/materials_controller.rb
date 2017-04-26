@@ -6,11 +6,11 @@ module Api
 
         def index
           materials = Material.paginate(page: params[:page])
-          render json: materials, root: 'data', meta: pagination_dict(materials)
+          render json: materials, meta: pagination_dict(materials), meta_key: 'pagination'
         end
 
         def show
-          render json: @material, root: 'data'
+          render json: @material
         end
 
         def create
