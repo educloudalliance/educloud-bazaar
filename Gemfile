@@ -9,6 +9,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'paperclip', '~> 5.0.0'
 gem 'pg', '~> 0.20.0'
+gem 'rails_admin', '~> 1.1.1'
 gem 'swagger-blocks'
 gem 'will_paginate', '~> 3.1.0'
 

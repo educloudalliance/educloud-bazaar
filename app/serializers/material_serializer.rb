@@ -3,7 +3,7 @@ class MaterialSerializer < ActiveModel::Serializer
   type 'data'
 
   has_many :metadata do
-    object.metadata.map do |m|
+    object.metadata.where(metadata: {enabled: true}).map do |m|
       "#{m.country}#{m.subject}"
     end
   end
