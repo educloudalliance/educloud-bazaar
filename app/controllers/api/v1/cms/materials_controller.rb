@@ -6,11 +6,13 @@ module Api
 
         def index
           materials = Material.paginate(page: params[:page])
-          render json: materials, meta: pagination_dict(materials), meta_key: 'pagination'
+          if stale?(materials)
+            render json: materials, meta: pagination_dict(materials), meta_key: 'pagination'
+          end
         end
 
         def show
-          render json: @material
+          render json: @material if stale?(@material)
         end
 
         def create

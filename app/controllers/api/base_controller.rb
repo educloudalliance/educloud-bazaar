@@ -17,9 +17,8 @@ module Api
     end
 
     def find_metadata
-      metadata = Metadata.where(country: params[:id])
-      raise ActiveRecord::RecordNotFound if metadata.empty?
-      @metadata = metadata_fields_to_array(metadata)
+      @metadata = Metadata.where(country: params[:id])
+      @metadata_json = metadata_fields_to_array(@metadata)
     end
 
     def metadata_fields_to_array(collection)
