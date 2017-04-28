@@ -23,9 +23,9 @@ RSpec.describe Api::V1::Cms::MetadataController, type: :controller do
       expect(JSON(response.body)['data'].size).to be > 0
     end
 
-    it 'response with record not found' do
-      get :show, params: { id: 0 }
-      expect(JSON(response.body)['error']).to eq('RecordNotFound')
+    it 'response with empty array when country not found' do
+      get :show, params: { id: 'non-existent_country' }
+      expect(JSON(response.body)['data']).to be_empty
     end
   end
 end

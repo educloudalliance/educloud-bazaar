@@ -5,11 +5,11 @@ module Api
         before_action :find_metadata, only: :show
 
         def index
-          render json: metadata_fields_to_array(Metadata.all)
+          render json: metadata_fields_to_array(Metadata.all) if stale?(Metadata.all)
         end
 
         def show
-          render json: @metadata
+          render json: @metadata_json if stale?(@metadata)
         end
       end
     end
