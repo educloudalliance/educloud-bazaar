@@ -17,7 +17,7 @@ module Api
     end
 
     def find_metadata
-      @metadata = Metadata.where(country: params[:id])
+      @metadata = Metadata.where(country: params[:id]).enabled
       @metadata_json = metadata_fields_to_array(@metadata)
     end
 
@@ -30,7 +30,7 @@ module Api
     end
 
     def pagination_dict(collection)
-      hash = { count: collection.total_pages }
+      hash = { pages: collection.total_pages }
       hash[:next_url] = api_v1_cms_materials_url(page: collection.next_page) if collection.next_page.present?
       hash[:prev_url] = api_v1_cms_materials_url(page: collection.previous_page) if collection.previous_page.present?
       hash
