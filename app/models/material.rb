@@ -9,6 +9,8 @@ class Material < ApplicationRecord
   has_many :materials_metadata, dependent: :destroy
   has_many :metadata, through: :materials_metadata
 
+  has_many :shopping_cart_items, class_name: 'ShoppingCartItem'
+
   has_attached_file :image, styles: {thumbnail: '150x150#', standard_resolution: '306x306#', low_resolution: '612x612#'}
   validates_attachment :image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] },
                        size: { less_than: 5.megabytes }

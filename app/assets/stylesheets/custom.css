@@ -1,0 +1,26 @@
+body {
+    padding-top: 70px;
+}
+
+.back-material-list {
+    margin-bottom: 10px;
+}
+
+.form-signin {
+    max-width: 230px;
+    padding: 15px;
+    margin: 10% auto;
+    text-align: center;
+}
+
+.my-cart, .my-cart:hover {
+    text-decoration: none;
+    color: #337ab7;
+}
+
+.cart-messages {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    display: none;
+}

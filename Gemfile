@@ -7,11 +7,15 @@ end
 
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'acts-as-taggable-on', '~> 4.0'
+gem 'acts_as_shopping_cart', '~> 0.4.0'
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'paperclip', '~> 5.0.0'
 gem 'pg', '~> 0.20.0'
 gem 'rails_admin', '~> 1.1.1'
+gem 'ruby-saml', '~> 1.4.0'
 gem 'swagger-blocks'
 gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
@@ -31,7 +35,7 @@ gem 'coffee-rails', '~> 4.2'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -48,6 +52,7 @@ group :development, :test do
 
   gem 'factory_girl_rails'
   gem 'ffaker'
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
 end
 
