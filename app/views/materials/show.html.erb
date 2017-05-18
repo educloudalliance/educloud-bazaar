@@ -1,0 +1,58 @@
+<%= render 'shared/header' %>
+<div class="container">
+  <div class="back-material-list">
+    <%= link_to materials_path(page: params[:page]), class: 'btn btn-primary' do %>
+        <span class="glyphicon glyphicon-share-alt " aria-hidden="true">&nbsp</span>Materials list
+    <% end %>
+  </div>
+  <div class="row table-row">
+    <div class="col-md-6">
+      <div class="thumbnail">
+        <img src="<%= @material.image.url %>" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <h1><%= @material.name %></h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="description">Description: <%= @material.description %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span>Language: <%= @material.language %></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span>Tags: </span>
+          <% @material.tag_list.each do |tag|  %>
+            <span class="tag label label-info"><%= tag %></span>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span>Publisher Data: <%= @material.publisher_data %></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p>Metadata: </p>
+          <ul>
+            <% @material.metadata.enabled.each do |item| %>
+                <li><%= "#{item.country}#{item.subject}" %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+        <div class="col-md-12">
+          <%= link_to 'ADD TO CART', shopping_cart_path(id: @material.id), method: :post, class: "btn btn-success btn-block add-to-cart" %>
+        </div>
+    </div>
+  </div>
+</div>

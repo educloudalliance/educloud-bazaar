@@ -3,12 +3,29 @@
   <head>
     <title>Educloud</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <%= yield %>
+
+    <% content_for :footer do %>
+    <div class="col-md-3 cart-messages">
+      <div class="alert "></div>
+    </div>
+      <script>
+      $(function() {
+        <% flash.each do |name, msg| %>
+          flash_message('<%=j raw msg %>', '<%= noty_class(name) %>');
+        <% end %>
+        function flash_message(text, class_name){
+          $('.cart-messages').children().removeClass().addClass('alert').addClass(class_name).html(text);
+          $('.cart-messages').fadeIn(1000, function(){
+              $(this).delay(1000).fadeOut(1000);
+          });
+        }
+      });
+    </script>
+    <% end %>
+    <%= yield :footer %>
   </body>
 </html>

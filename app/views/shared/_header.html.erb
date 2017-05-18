@@ -1,0 +1,14 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="collapse navbar-collapse">
+      <p class="navbar-text navbar-left">
+        <%= link_to shopping_cart_path, class: 'my-cart' do %>
+          <span class="glyphicon glyphicon-shopping-cart"></span>  My cart  <span class="js-cart-count"><%= @cart_items %></span>
+        <% end %>
+      </p>
+      <p class="navbar-text navbar-right">
+        Logged in as <%= current_user %>&nbsp;<%= link_to "Logout", logout_saml_index_path(slo: '1') %>
+      </p>
+    </div>
+  </div>
+</nav>

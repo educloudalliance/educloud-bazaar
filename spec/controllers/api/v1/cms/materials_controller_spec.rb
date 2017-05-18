@@ -31,7 +31,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :controller do
 
   describe 'POST material' do
     it 'create new material and response success 1' do
-      post :create, params: { publisher_resource_id: rand(1..99),
+      post :create, params: { publisher_resource_id: Time.current.to_i,
                               name: 'name', language: 'en', description: '1' }
 
       expect(response).to have_http_status(200)
