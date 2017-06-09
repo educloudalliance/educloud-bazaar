@@ -6,7 +6,6 @@ RSpec.describe MaterialsController, type: :controller do
 
     context 'when user loggin in' do
       before do
-        auth_user
         get :index
       end
 
@@ -20,26 +19,15 @@ RSpec.describe MaterialsController, type: :controller do
         expect(response).to render_template('index')
       end
     end
-
-    context 'when user fail login' do
-      before do
-        get :index
-      end
-
-      it 'redirect to login view' do
-        expect(response).to redirect_to saml_index_path
-      end
-    end
   end
 
   describe 'GET #show' do
+    let(:shopping_cart) { FactoryGirl.create(:shopping_cart) }
     let(:material) { FactoryGirl.create(:material) }
-    before do
-      auth_user
-    end
 
     context 'when find Material' do
       before do
+        session[:shopping_cart_id] = shopping_cart.id
         get :show, params: { id: material.id }
       end
 

@@ -65,9 +65,7 @@
               <strong>Total <%= "#{@shopping_cart.total.currency.html_entity} #{@shopping_cart.total.to_f}" %></strong>
             </div>
             <div class="col-md-2">
-              <button type="button" class="btn btn-success btn-block">
-                Approve
-              </button>
+              <%= link_to 'Approve', shopping_cart_approve_path, class: "btn btn-success btn-block" %>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 class MaterialsController < ApplicationController
-  before_action :auth_user
+  before_action :extract_shopping_cart, only: :index
   before_action :cart_items_count
 
   def index
