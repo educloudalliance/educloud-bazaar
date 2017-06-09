@@ -35,5 +35,12 @@ module Api
       hash[:prev_url] = api_v1_cms_materials_url(page: collection.previous_page) if collection.previous_page.present?
       hash
     end
+
+    def response_browse_url(resource)
+      {
+          success: 1,
+          browse_url: "#{materials_url}?session_id=#{resource.uid}"
+      }
+    end
   end
 end

@@ -5,21 +5,16 @@ Rails.application.routes.draw do
       namespace :cms do
         resources :materials, only: %i[index show create update destroy]
         resources :metadata, only: %i[index show]
-
         resources :apidocs, only: %i[index show]
       end
-    end
-  end
-  resources :saml, only: :index do
-    collection do
-      get :sso
-      post :acs
-      get :metadata
-      get :logout
+      namespace :lms do
+        resource :browse, only: :create
+      end
     end
   end
 
   resources :materials, only: %i[index show]
   resource :shopping_cart, only: %i[destroy show create]
-  root 'saml#index'
+  get :shopping_cart_approve, to: 'shopping_carts#approve'
+  root 'materials#index'
 end
