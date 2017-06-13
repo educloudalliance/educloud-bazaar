@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ShoppingCartsController, type: :controller do
-  before do
-    auth_user
-  end
-
   let(:shopping_cart) { FactoryGirl.create(:shopping_cart) }
   let(:material) { FactoryGirl.create(:material) }
 
