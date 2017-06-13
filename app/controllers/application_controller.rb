@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-  include SamlHelper
 
   rescue_from ActiveRecord::RecordNotFound do
     redirect_to materials_path, alert: 'Material not found'

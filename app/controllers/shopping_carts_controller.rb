@@ -11,6 +11,11 @@ class ShoppingCartsController < ApplicationController
     @resources = @shopping_cart.shopping_cart_items.with_material
   end
 
+  def approve
+    @shopping_cart.clear
+    redirect_to materials_path, notice: 'Successfully approved'
+  end
+
   def destroy
     @shopping_cart.remove(@material, 1)
     redirect_to shopping_cart_path, alert: 'Item was removed from cart'
