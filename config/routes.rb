@@ -7,6 +7,9 @@ Rails.application.routes.draw do
         resources :metadata, only: %i[index show]
         resources :apidocs, only: %i[index show]
       end
+      namespace :lms do
+        resource :browse, only: :create
+      end
     end
   end
 
