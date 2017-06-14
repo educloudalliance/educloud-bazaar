@@ -1,15 +1,15 @@
 module Api
   class BaseController < ActionController::API
     rescue_from ActiveRecord::RecordNotFound do
-      render json: {error: 'RecordNotFound'}
+      render json: {error: 'RecordNotFound'}, status: 404
     end
 
     rescue_from ActiveRecord::RecordInvalid do
-      render json: {error: 'RecordInvalid'}
+      render json: {error: 'RecordInvalid'}, status: 400
     end
 
     rescue_from ActionController::ParameterMissing do
-      render json: {error: 'ParameterMissing'}
+      render json: {error: 'ParameterMissing'}, status: 400
     end
 
     def find_material

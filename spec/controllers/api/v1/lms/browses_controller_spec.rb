@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Lms::BrowsesController, type: :controller do
-  describe 'POST lms/browse' do
+  describe 'POST #create' do
     it 'save user data to session table and response with callback_url and session_id' do
       post :create, params: { first_name: 'first_name', last_name: 'last_name',
                               user_id: 'user_id', context_id: 'context_id', role: 'admin',
@@ -14,6 +14,7 @@ RSpec.describe Api::V1::Lms::BrowsesController, type: :controller do
 
     it 'response with record invalid' do
       post :create, params: { first_name: 'first_name' }
+      expect(response).to have_http_status(400)
       expect(JSON(response.body)['error']).to eq('RecordInvalid')
     end
   end

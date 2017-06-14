@@ -12,7 +12,7 @@ module Api
         end
 
         def show
-          render json: @material if stale?(@material)
+          render json: @material, adapter: :attribute if stale?(@material)
         end
 
         def create

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::Cms::MetadataController, type: :controller do
   let(:metadata) { create(:metadata) }
 
-  describe 'GET all metadata' do
+  describe 'GET #index' do
     it 'response with list of metadata' do
       get :index, format: :json
       expect(response).to have_http_status(200)
@@ -13,7 +13,7 @@ RSpec.describe Api::V1::Cms::MetadataController, type: :controller do
     end
   end
 
-  describe 'GET metadata by country' do
+  describe 'GET #show' do
     it 'response with metadata' do
       get :show, params: { id: metadata.country }
 
