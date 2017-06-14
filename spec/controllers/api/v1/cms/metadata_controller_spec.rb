@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Cms::MetadataController, type: :controller do
-  let(:metadata) { FactoryGirl.create(:metadata) }
+  let(:metadata) { create(:metadata) }
 
   describe 'GET all metadata' do
     it 'response with list of metadata' do

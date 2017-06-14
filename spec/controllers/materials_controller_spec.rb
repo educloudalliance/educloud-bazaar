@@ -1,16 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe MaterialsController, type: :controller do
+  let(:cms_session) { create(:cms_session) }
+  let!(:material_list) { create_list(:material, 3) }
+  let(:shopping_cart) { ShoppingCart.create(cms_sessions_id: cms_session.id) }
+  before(:each) do
+    session[:session_id] = cms_session.uid
+    session[:shopping_cart_id] = shopping_cart.id
+  end
   describe 'GET #index' do
-    let(:materials) { Material.paginate(page: 2, per_page: 3) }
-
     context 'when user loggin in' do
       before do
-        get :index
+        get :index, params: { page: 1 }
       end
 
       it 'assigns all materials to @materials' do
-        expect(assigns(:materials).page(2)).to eq(materials)
+        expect(assigns(:materials)).to eq(Material.paginate(page: 1, per_page: 3))
       end
       it 'has a 200 status code' do
         expect(response.status).to eq(200)
@@ -19,11 +24,21 @@ RSpec.describe MaterialsController, type: :controller do
         expect(response).to render_template('index')
       end
     end
+
+    context 'when user fail login' do
+      before do
+        get :index, params: { page: 2 }, session: { session_id: nil, shopping_cart_id: nil }
+      end
+
+      it 'respond with error' do
+        expect(JSON(response.body)['error']).to eq('Not Authorized')
+      end
+    end
   end
 
   describe 'GET #show' do
-    let(:shopping_cart) { FactoryGirl.create(:shopping_cart) }
-    let(:material) { FactoryGirl.create(:material) }
+    let(:shopping_cart) { create(:shopping_cart) }
+    let(:material) { create(:material) }
 
     context 'when find Material' do
       before do
