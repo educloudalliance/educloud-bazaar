@@ -7,11 +7,15 @@ Rails.application.routes.draw do
         resources :metadata, only: %i[index show]
         resources :apidocs, only: %i[index show]
       end
+      namespace :lms do
+        resource :browse, only: :create
+      end
     end
   end
 
   resources :materials, only: %i[index show]
   resource :shopping_cart, only: %i[destroy show create]
   get :shopping_cart_approve, to: 'shopping_carts#approve'
-  root 'materials#index'
+  resource :sessions, only: %i[show]
+  root 'sessions#show'
 end

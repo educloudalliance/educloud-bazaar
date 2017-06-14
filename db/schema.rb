@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511114118) do
+ActiveRecord::Schema.define(version: 20170613121948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cms_sessions", force: :cascade do |t|
+    t.string  "first_name",                null: false
+    t.string  "last_name",                 null: false
+    t.string  "email"
+    t.string  "user_id",                   null: false
+    t.string  "context_id",                null: false
+    t.integer "role",                      null: false
+    t.string  "school",                    null: false
+    t.string  "school_id",                 null: false
+    t.string  "city",                      null: false
+    t.string  "city_id",                   null: false
+    t.string  "oid"
+    t.string  "add_resource_callback_url"
+    t.string  "cancel_url"
+    t.string  "uid",                       null: false
+    t.index ["uid"], name: "index_cms_sessions_on_uid", unique: true, using: :btree
+  end
 
   create_table "materials", force: :cascade do |t|
     t.string   "name",                  limit: 255, null: false
@@ -59,8 +77,10 @@ ActiveRecord::Schema.define(version: 20170511114118) do
   end
 
   create_table "shopping_carts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "cms_sessions_id"
+    t.index ["cms_sessions_id"], name: "index_shopping_carts_on_cms_sessions_id", using: :btree
   end
 
   create_table "taggings", force: :cascade do |t|

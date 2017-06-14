@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Cms::MaterialsController, type: :controller do
-  let(:material) { FactoryGirl.create(:material) }
+  let(:material) { create(:material) }
   let(:publisher_resource_id) { material.publisher_resource_id }
 
   describe 'GET all materials' do

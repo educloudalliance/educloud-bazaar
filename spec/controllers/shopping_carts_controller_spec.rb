@@ -1,8 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe ShoppingCartsController, type: :controller do
-  let(:shopping_cart) { FactoryGirl.create(:shopping_cart) }
-  let(:material) { FactoryGirl.create(:material) }
+  let(:material) { create(:material) }
+  let(:cms_session) { create(:cms_session) }
+  let(:shopping_cart) { ShoppingCart.create(cms_sessions_id: cms_session.id) }
+  before(:each) do
+    session[:session_id] = cms_session.uid
+    session[:shopping_cart_id] = shopping_cart.id
+  end
 
   describe 'Add material to the cart #create' do
     before do

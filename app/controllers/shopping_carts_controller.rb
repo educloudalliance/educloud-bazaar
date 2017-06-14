@@ -1,4 +1,5 @@
 class ShoppingCartsController < ApplicationController
+  before_action :auth_user
   before_action :extract_shopping_cart
   before_action :find_material, only: %i[create destroy]
 
