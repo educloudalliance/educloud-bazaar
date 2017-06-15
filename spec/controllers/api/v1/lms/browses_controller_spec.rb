@@ -1,21 +1,44 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::Lms::BrowsesController, type: :controller do
+RSpec.describe Api::V1::Lms::BrowsesController, type: :request do
+  let(:account) { create :account }
+  let(:access_token) { create(:access_token, resource_owner_id: account.id).token }
+
   describe 'POST #create' do
-    it 'save user data to session table and response with callback_url and session_id' do
-      post :create, params: { first_name: 'first_name', last_name: 'last_name',
-                              user_id: 'user_id', context_id: 'context_id', role: 'admin',
-                              school: 'school', school_id: 'school_id', city: 'city',
-                              city_id: 'city_id' }
-      expect(response).to have_http_status(200)
-      expect(JSON(response.body)['success']).to eq(1)
-      expect(JSON(response.body)['browse_url']).to eq("#{materials_url}?session_id=#{CmsSession.last.uid}")
+    let(:user_id) { 'user_id' }
+
+    before do
+      post '/api/v1/lms/browse',
+        params: {
+          access_token: access_token, first_name: 'first_name', last_name: 'last_name',
+          user_id: user_id, context_id: 'context_id', role: 'admin',
+          school: 'school', school_id: 'school_id', city: 'city', city_id: 'city_id'
+        }
     end
 
-    it 'response with record invalid' do
-      post :create, params: { first_name: 'first_name' }
-      expect(response).to have_http_status(400)
-      expect(JSON(response.body)['error']).to eq('RecordInvalid')
+    context 'when all params are valid' do
+      it 'responses with JSON that contain callback_url and session_id' do
+        expect(response).to have_http_status(200)
+        expect(JSON(response.body)['success']).to eq(1)
+        expect(JSON(response.body)['browse_url']).to eq(materials_url(session_id: CmsSession.last.uid))
+      end
+    end
+
+    context 'when request with wrong access_token' do
+      let(:access_token) { 'fake_token' }
+
+      it 'responses with JSON with error' do
+        expect(response).to have_http_status(401)
+      end
+    end
+
+    context 'when missed requires params' do
+      let(:user_id) { nil }
+
+      it 'responses error in JSON' do
+        expect(response).to have_http_status(400)
+        expect(JSON(response.body)['error']).to eq('RecordInvalid')
+      end
     end
   end
 end

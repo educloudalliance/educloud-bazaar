@@ -6,6 +6,8 @@ class Material < ApplicationRecord
   validates :language, presence: true
   validates :publisher_resource_id, presence: true, uniqueness: true
 
+  belongs_to :account
+
   has_many :materials_metadata, dependent: :destroy
   has_many :metadata, through: :materials_metadata
 
