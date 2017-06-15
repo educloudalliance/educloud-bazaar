@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       end
       namespace :lms do
         resource :browse, only: :create
+        resource :view, only: :create
       end
     end
   end

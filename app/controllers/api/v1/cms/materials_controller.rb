@@ -34,7 +34,7 @@ module Api
         private
 
         def create_params
-          params.permit(:name, :description, :language, :publisher_resource_id, :metadata, :image)
+          params.permit(:name, :description, :language, :publisher_resource_id, :publisher_url, :metadata, :image)
         end
       end
     end

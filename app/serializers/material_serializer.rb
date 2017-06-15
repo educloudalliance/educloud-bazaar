@@ -1,5 +1,6 @@
 class MaterialSerializer < ActiveModel::Serializer
-  attributes :name, :description, :language, :publisher_resource_id, :publisher_data, :metadata, :tags, :images
+  attributes :name, :description, :language, :publisher_resource_id, :publisher_url,
+    :publisher_data, :metadata, :tags, :images
   type 'data'
 
   has_many :metadata do

@@ -17,7 +17,8 @@ RSpec.describe Api::V1::Cms::MetadataController, type: :controller do
 
       expect(response).to have_http_status(200)
       expect(JSON(response.body)['success']).to eq(1)
-      expect(JSON(response.body)['data']).to eq(["#{metadata.country}#{metadata.subject}"])
+      expect(JSON(response.body)['data'])
+        .to eq(Metadata.where(country: metadata.country).enabled.map { |m| "#{m.country}#{m.subject}" })
     end
 
     it 'response with empty array when country not found' do
