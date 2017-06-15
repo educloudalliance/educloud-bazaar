@@ -5,11 +5,15 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :controller do
   let(:publisher_resource_id) { material.publisher_resource_id }
 
   describe 'GET #index' do
+    before do
+      create_list(:material, 2)
+    end
+
     it 'response with list of materials' do
       get :index, format: :json
       expect(response).to have_http_status(200)
       expect(response.body).not_to be_empty
-      expect(JSON(response.body)['data'].size).to be > 0
+      expect(JSON(response.body)['data'].size).to eq(2)
     end
   end
 
@@ -63,7 +67,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'delete material and response success 1' do
-      delete :destroy, params: {id: publisher_resource_id}
+      delete :destroy, params: { id: publisher_resource_id }
 
       expect(response).to have_http_status(200)
       expect(JSON(response.body)['success']).to eq(1)

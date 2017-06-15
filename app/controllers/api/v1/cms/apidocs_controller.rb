@@ -37,6 +37,8 @@ module Api
           SwaggerMaterialModel,
           SwaggerMetadataController,
           SwaggerMetadataModel,
+          SwaggerProductModel,
+          SwaggerProductsController,
           self
         ].freeze
 
