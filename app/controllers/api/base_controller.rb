@@ -1,15 +1,15 @@
 module Api
   class BaseController < ActionController::API
     rescue_from ActiveRecord::RecordNotFound do
-      render json: {error: 'RecordNotFound'}, status: 404
+      render json: { error: 'RecordNotFound' }, status: 404
     end
 
     rescue_from ActiveRecord::RecordInvalid do
-      render json: {error: 'RecordInvalid'}, status: 400
+      render json: { error: 'RecordInvalid' }, status: 400
     end
 
     rescue_from ActionController::ParameterMissing do
-      render json: {error: 'ParameterMissing'}, status: 400
+      render json: { error: 'ParameterMissing' }, status: 400
     end
 
     def find_material
@@ -22,7 +22,7 @@ module Api
     end
 
     def metadata_fields_to_array(collection)
-      hash = {success: 1}
+      hash = { success: 1 }
       hash[:data] = collection.map do |metadata|
         "#{metadata.country}#{metadata.subject}"
       end

@@ -11,7 +11,7 @@ class CmsSession < ApplicationRecord
   validates :city, presence: true
   validates :city_id, presence: true
 
-  enum role: {admin: 0, teacher: 1, student: 2}, _prefix: :role
+  enum role: { admin: 0, teacher: 1, student: 2 }, _prefix: :role
 
   private
 

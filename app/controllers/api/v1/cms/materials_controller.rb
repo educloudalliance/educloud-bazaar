@@ -18,17 +18,17 @@ module Api
         def create
           new_material = Material.new(create_params)
           new_material.tag_list = params[:tags]
-          render json: {success: 1} if new_material.save!
+          render json: { success: 1 } if new_material.save!
         end
 
         def update
           @material.tag_list = params[:tags] if params[:tags].present?
-          render json: {success: 1} if @material.update!(create_params)
+          render json: { success: 1 } if @material.update!(create_params)
         end
 
         def destroy
           @material.destroy!
-          render json: {success: 1}
+          render json: { success: 1 }
         end
 
         private

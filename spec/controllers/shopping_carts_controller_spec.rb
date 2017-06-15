@@ -12,7 +12,7 @@ RSpec.describe ShoppingCartsController, type: :controller do
   describe 'Add material to the cart #create' do
     before do
       request.env['HTTP_REFERER'] = materials_url
-      post :create, params: {id: material.id}, format: :json
+      post :create, params: { id: material.id }, format: :json
     end
 
     it 'should respond with cart items count and message' do

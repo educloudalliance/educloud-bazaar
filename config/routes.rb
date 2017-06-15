@@ -6,6 +6,7 @@ Rails.application.routes.draw do
         resources :materials, only: %i[index show create update destroy]
         resources :metadata, only: %i[index show]
         resources :apidocs, only: %i[index show]
+        resources :products, only: %i[create update show]
       end
       namespace :lms do
         resource :browse, only: :create

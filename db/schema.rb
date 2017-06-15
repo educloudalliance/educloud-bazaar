@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 20170615082657) do
     t.index ["uid"], name: "index_cms_sessions_on_uid", unique: true, using: :btree
   end
 
+  create_table "licenses", force: :cascade do |t|
+    t.integer  "product_id", null: false
+    t.string   "school_id"
+    t.string   "city_id"
+    t.date     "expire_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_licenses_on_product_id", using: :btree
+  end
+
   create_table "materials", force: :cascade do |t|
     t.string   "name",                  limit: 255, null: false
     t.text     "description",                       null: false
@@ -63,6 +73,71 @@ ActiveRecord::Schema.define(version: 20170615082657) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.boolean  "enabled",    default: true
+  end
+
+  create_table "oauth_access_grants", force: :cascade do |t|
+    t.integer  "resource_owner_id", null: false
+    t.integer  "application_id",    null: false
+    t.string   "token",             null: false
+    t.integer  "expires_in",        null: false
+    t.text     "redirect_uri",      null: false
+    t.datetime "created_at",        null: false
+    t.datetime "revoked_at"
+    t.string   "scopes"
+    t.index ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
+  end
+
+  create_table "oauth_access_tokens", force: :cascade do |t|
+    t.integer  "resource_owner_id"
+    t.integer  "application_id"
+    t.string   "token",                               null: false
+    t.string   "refresh_token"
+    t.integer  "expires_in"
+    t.datetime "revoked_at"
+    t.datetime "created_at",                          null: false
+    t.string   "scopes"
+    t.string   "previous_refresh_token", default: "", null: false
+    t.index ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
+    t.index ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
+    t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
+  end
+
+  create_table "oauth_applications", force: :cascade do |t|
+    t.string   "name",                      null: false
+    t.string   "uid",                       null: false
+    t.string   "secret",                    null: false
+    t.text     "redirect_uri",              null: false
+    t.string   "scopes",       default: "", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
+  end
+
+  create_table "product_materials", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "material_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["material_id"], name: "index_product_materials_on_material_id", using: :btree
+    t.index ["product_id", "material_id"], name: "index_product_materials_on_product_id_and_material_id", unique: true, using: :btree
+    t.index ["product_id"], name: "index_product_materials_on_product_id", using: :btree
+  end
+
+  create_table "product_meterials", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "material_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["material_id"], name: "index_product_meterials_on_material_id", using: :btree
+    t.index ["product_id", "material_id"], name: "index_product_meterials_on_product_id_and_material_id", unique: true, using: :btree
+    t.index ["product_id"], name: "index_product_meterials_on_product_id", using: :btree
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "shopping_cart_items", force: :cascade do |t|
@@ -118,4 +193,6 @@ ActiveRecord::Schema.define(version: 20170615082657) do
     t.index ["secret_key"], name: "index_tokens_on_secret_key", using: :btree
   end
 
+  add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
+  add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
 end

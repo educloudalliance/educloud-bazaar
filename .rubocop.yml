@@ -38,7 +38,7 @@ Style/GuardClause:
 Style/IfUnlessModifier:
   Enabled: false
 Style/SpaceInsideHashLiteralBraces:
-  Enabled: false
+  Enabled: true
 Style/Lambda:
   Enabled: false
 Style/RaiseArgs:
