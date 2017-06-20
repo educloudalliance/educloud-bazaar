@@ -3,10 +3,10 @@ module Api
     module Lms
       class BrowsesController < ::Api::BaseController
         def create
-          @resource = CmsSession.new(cms_sessions_params)
+          resource = CmsSession.new(cms_sessions_params)
 
-          if @resource.save!
-            render json: response_browse_url(@resource)
+          if resource.save!
+            render json: response_browse_url(resource)
           end
         end
 

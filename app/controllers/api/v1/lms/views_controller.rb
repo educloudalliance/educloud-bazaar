@@ -9,7 +9,8 @@ module Api
         private
 
         def publisher_url
-          Material.find_by!(publisher_resource_id: params[:resource_uid]).publisher_url
+          Material.by_viewer(views_params[:city_id], views_params[:school_id])
+            .find_by!(publisher_resource_id: views_params[:resource_uid]).publisher_url
         end
 
         def views_params
