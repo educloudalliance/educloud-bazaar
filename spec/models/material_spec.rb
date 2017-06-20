@@ -12,6 +12,7 @@ RSpec.describe Material, type: :model do
     it { should validate_attachment_content_type(:image).allowing('image/jpeg', 'image/png', 'image/gif') }
     it { should validate_attachment_size(:image).less_than(5.megabytes) }
 
+    it { should belong_to(:account) }
     it { should have_many(:materials_metadata).dependent(:destroy) }
     it { should have_many(:metadata).through(:materials_metadata) }
   end

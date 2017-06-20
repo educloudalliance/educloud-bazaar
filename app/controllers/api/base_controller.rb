@@ -12,8 +12,14 @@ module Api
       render json: { error: 'ParameterMissing' }, status: 400
     end
 
+    before_action :doorkeeper_authorize!
+
+    def current_account
+      Account.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
+    end
+
     def find_material
-      @material = Material.find_by!(publisher_resource_id: params[:id])
+      @material = current_account.materials.find_by!(publisher_resource_id: params[:id])
     end
 
     def find_metadata

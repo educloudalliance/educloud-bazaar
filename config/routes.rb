@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :accounts
+  use_doorkeeper
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   namespace :api do
     namespace :v1 do
       namespace :cms do

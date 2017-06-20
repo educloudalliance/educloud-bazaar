@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615082657) do
+ActiveRecord::Schema.define(version: 20170616082626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string   "name",                                      null: false
+    t.integer  "kind",               limit: 2, default: 0,  null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "email",                        default: "", null: false
+    t.string   "encrypted_password",           default: "", null: false
+    t.integer  "sign_in_count",                default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.index ["email"], name: "index_accounts_on_email", unique: true, using: :btree
+  end
 
   create_table "cms_sessions", force: :cascade do |t|
     t.string  "first_name",                null: false
@@ -47,7 +62,7 @@ ActiveRecord::Schema.define(version: 20170615082657) do
     t.string   "name",                  limit: 255, null: false
     t.text     "description",                       null: false
     t.string   "language",                          null: false
-    t.integer  "publisher_resource_id"
+    t.string   "publisher_resource_id"
     t.text     "publisher_data"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
@@ -56,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170615082657) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "publisher_url"
+    t.integer  "account_id",                        null: false
   end
 
   create_table "materials_metadata", force: :cascade do |t|
@@ -121,16 +137,6 @@ ActiveRecord::Schema.define(version: 20170615082657) do
     t.index ["material_id"], name: "index_product_materials_on_material_id", using: :btree
     t.index ["product_id", "material_id"], name: "index_product_materials_on_product_id_and_material_id", unique: true, using: :btree
     t.index ["product_id"], name: "index_product_materials_on_product_id", using: :btree
-  end
-
-  create_table "product_meterials", force: :cascade do |t|
-    t.integer  "product_id"
-    t.integer  "material_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["material_id"], name: "index_product_meterials_on_material_id", using: :btree
-    t.index ["product_id", "material_id"], name: "index_product_meterials_on_product_id_and_material_id", unique: true, using: :btree
-    t.index ["product_id"], name: "index_product_meterials_on_product_id", using: :btree
   end
 
   create_table "products", force: :cascade do |t|

@@ -6,7 +6,6 @@ countries = ['global', 'fi', 'ru']
   end
 end
 
-
 (1..10).each do |iteration|
   Material.where(publisher_resource_id: iteration).first_or_create! do |material|
     language = FFaker::Locale.code

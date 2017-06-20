@@ -2,15 +2,14 @@ module Api
   module V1
     module Lms
       class ViewsController < ::Api::BaseController
-        before_action :find_publisher_url, only: :create
         def create
-          render json: { success: 1, view_url: @publisher_url }
+          render json: { success: 1, view_url: publisher_url }
         end
 
         private
 
-        def find_publisher_url
-          @publisher_url = Material.find_by!(publisher_resource_id: params[:resource_uid]).publisher_url
+        def publisher_url
+          Material.find_by!(publisher_resource_id: params[:resource_uid]).publisher_url
         end
 
         def views_params
