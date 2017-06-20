@@ -231,8 +231,6 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
-    ruby-saml (1.4.2)
-      nokogiri (>= 1.5.10)
     sass (3.4.23)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -304,7 +302,6 @@ DEPENDENCIES
   rails_admin (~> 1.1.1)
   rspec-rails
   rubocop
-  ruby-saml (~> 1.4.0)
   sass-rails (~> 5.0)
   shoulda-matchers (~> 3.0)
   spring

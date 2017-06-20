@@ -139,16 +139,6 @@ ActiveRecord::Schema.define(version: 20170616082626) do
     t.index ["product_id"], name: "index_product_materials_on_product_id", using: :btree
   end
 
-  create_table "product_meterials", force: :cascade do |t|
-    t.integer  "product_id"
-    t.integer  "material_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["material_id"], name: "index_product_meterials_on_material_id", using: :btree
-    t.index ["product_id", "material_id"], name: "index_product_meterials_on_product_id_and_material_id", unique: true, using: :btree
-    t.index ["product_id"], name: "index_product_meterials_on_product_id", using: :btree
-  end
-
   create_table "products", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
@@ -198,15 +188,6 @@ ActiveRecord::Schema.define(version: 20170616082626) do
     t.string  "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
-  end
-
-  create_table "tokens", force: :cascade do |t|
-    t.string   "client_id"
-    t.string   "secret_key"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["client_id"], name: "index_tokens_on_client_id", using: :btree
-    t.index ["secret_key"], name: "index_tokens_on_secret_key", using: :btree
   end
 
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
