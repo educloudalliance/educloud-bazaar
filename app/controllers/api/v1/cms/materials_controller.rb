@@ -2,6 +2,7 @@ module Api
   module V1
     module Cms
       class MaterialsController < ::Api::BaseController
+        include MaterialsApiPagination
         before_action :find_material, only: %i[show update destroy]
 
         def index

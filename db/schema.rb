@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616082626) do
+ActiveRecord::Schema.define(version: 20170621101342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,18 @@ ActiveRecord::Schema.define(version: 20170616082626) do
     t.string  "cancel_url"
     t.string  "uid",                       null: false
     t.index ["uid"], name: "index_cms_sessions_on_uid", unique: true, using: :btree
+  end
+
+  create_table "cms_tokens", force: :cascade do |t|
+    t.string   "token"
+    t.integer  "material_id"
+    t.integer  "cms_session_id"
+    t.integer  "account_id"
+    t.datetime "expired_at",                     null: false
+    t.boolean  "used",           default: false, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["token"], name: "index_cms_tokens_on_token", unique: true, using: :btree
   end
 
   create_table "licenses", force: :cascade do |t|

@@ -15,9 +15,7 @@ class Material < ApplicationRecord
   validates_attachment :image, content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] },
                        size: { less_than: 5.megabytes }
 
-  validates :name, presence: true
-  validates :description, presence: true
-  validates :language, presence: true
+  validates :name, :description, :language, presence: true
   validates :publisher_resource_id, presence: true, uniqueness: true
 
   scope :by_viewer, (->(city_id, school_id) {

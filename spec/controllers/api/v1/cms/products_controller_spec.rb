@@ -94,7 +94,6 @@ RSpec.describe Api::V1::Cms::ProductsController, type: :request do
       let(:product_id) { 'fake_id' }
 
       it 'response with JSON about error' do
-        puts JSON(response.body).to_yaml
         expect(response).to have_http_status(404)
         expect(JSON(response.body)['error']).to eq('RecordNotFound')
       end

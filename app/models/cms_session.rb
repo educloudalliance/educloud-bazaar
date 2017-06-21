@@ -1,15 +1,7 @@
 class CmsSession < ApplicationRecord
-  before_save :generate_uid
+  validates :first_name, :last_name, :user_id, :context_id, :role, :school, :school_id, :city, :city_id, presence: true
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :user_id, presence: true
-  validates :context_id, presence: true
-  validates :role, presence: true
-  validates :school, presence: true
-  validates :school_id, presence: true
-  validates :city, presence: true
-  validates :city_id, presence: true
+  before_create :generate_uid
 
   enum role: { admin: 0, teacher: 1, student: 2 }, _prefix: :role
 
