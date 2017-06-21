@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_session
-    return @current_session if defined? @current_session
-
     @current_session ||= CmsSession.find_by(uid: session[:session_id])
   end
 
@@ -17,8 +15,8 @@ class ApplicationController < ActionController::Base
     @material = Material.find(params[:id])
   end
 
-  def extract_shopping_cart
-    @shopping_cart = ShoppingCart.find(session[:shopping_cart_id])
+  def current_shopping_cart
+    @shopping_cart ||= ShoppingCart.find(session[:shopping_cart_id])
   end
 
   def authenticate_viewer!
