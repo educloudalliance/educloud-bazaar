@@ -14,9 +14,7 @@ RSpec.describe SessionsController, type: :controller do
       it 'should save current shopping cart' do
         expect(session[:shopping_cart_id]).to eq(ShoppingCart.last.id)
       end
-      it 'redirect to materials view' do
-        expect(response).to redirect_to materials_path
-      end
+      it { should redirect_to(materials_path) }
     end
 
     context 'when user fail login' do

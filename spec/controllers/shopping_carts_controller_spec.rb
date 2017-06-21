@@ -19,12 +19,8 @@ RSpec.describe ShoppingCartsController, type: :controller do
       shopping_cart.add(material, (rand(20) + 1))
       expect(shopping_cart.cart_items.size).to eq(1)
     end
-    it 'show info message' do
-      expect(flash[:notice]).to be_present
-    end
-    it 'renders the index template' do
-      expect(response).to redirect_to materials_path
-    end
+    it { should set_flash[:notice] }
+    it { should redirect_to(materials_path) }
   end
 
   describe 'Show shopping cart #show' do
@@ -37,10 +33,6 @@ RSpec.describe ShoppingCartsController, type: :controller do
     it 'should have shopping cart item with material' do
       shopping_cart.add(material, (rand(20) + 1))
       expect(resources.first.material.name).to eq(material.name)
-    end
-
-    it 'renders the show template' do
-      expect(response).to render_template('show')
     end
   end
 
@@ -56,11 +48,7 @@ RSpec.describe ShoppingCartsController, type: :controller do
       shopping_cart.remove(material, 1)
       expect(shopping_cart.total.to_i).to eq(44)
     end
-    it 'show info message' do
-      expect(flash[:alert]).to be_present
-    end
-    it 'redirect to cart view' do
-      expect(response).to redirect_to shopping_cart_path
-    end
+    it { should set_flash[:alert] }
+    it { should redirect_to(shopping_cart_path) }
   end
 end
