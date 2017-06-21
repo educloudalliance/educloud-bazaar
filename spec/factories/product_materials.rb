@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :product_meterial do
+  factory :product_material do
     association :product
     association :material
   end

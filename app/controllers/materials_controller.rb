@@ -1,14 +1,15 @@
 class MaterialsController < ApplicationController
-  before_action :auth_user
+  before_action :authenticate_viewer!
   before_action :extract_shopping_cart, only: :index
   before_action :cart_items_count
 
   def index
-    @materials = Material.paginate(page: params[:page], per_page: 3)
+    @materials = Material.by_viewer(current_session[:city_id], current_session[:school_id]).order(id: :asc)
+      .paginate(page: params[:page], per_page: 3)
   end
 
   def show
-    @material = Material.find(params[:id])
+    @material = Material.by_viewer(current_session[:city_id], current_session[:school_id]).find(params[:id])
   end
 
   private

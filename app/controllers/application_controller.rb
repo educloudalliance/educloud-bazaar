@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
     redirect_to materials_path, alert: 'Material not found'
   end
 
+  protected
+
+  def current_session
+    return @current_session if defined? @current_session
+
+    @current_session ||= CmsSession.find_by(uid: session[:session_id])
+  end
+
   def find_material
     @material = Material.find(params[:id])
   end
@@ -13,7 +21,7 @@ class ApplicationController < ActionController::Base
     @shopping_cart = ShoppingCart.find(session[:shopping_cart_id])
   end
 
-  def auth_user
+  def authenticate_viewer!
     if session[:session_id].nil?
       reset_session
       render json: { error: 'Not Authorized' }
