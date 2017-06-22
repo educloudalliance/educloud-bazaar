@@ -31,7 +31,7 @@ RSpec.describe Api::V1::Lms::ViewsController, type: :request do
       it 'returns JSON with view_url' do
         expect(response).to have_http_status(200)
         expect(JSON(response.body)['success']).to eq(1)
-        expect(JSON(response.body)['view_url']).to eq(material.publisher_url)
+        expect(JSON(response.body)['view_url']).to eq("#{material.publisher_url}?token=#{CmsToken.last.token}")
       end
     end
 

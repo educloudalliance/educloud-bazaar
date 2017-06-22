@@ -22,7 +22,7 @@ RailsAdmin.config do |config|
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar true
-  config.included_models << 'Metadata'
+  config.included_models = %w[Account Metadata]
 
   config.actions do
     dashboard                     # mandatory
@@ -39,10 +39,14 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
-  config.model 'Metadata' do
-    list do
+
+  config.model 'Account' do
+    edit do
       exclude_fields :created_at, :updated_at
     end
+  end
+
+  config.model 'Metadata' do
     edit do
       exclude_fields :created_at, :updated_at
     end

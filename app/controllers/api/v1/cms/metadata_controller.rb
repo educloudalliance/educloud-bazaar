@@ -2,6 +2,7 @@ module Api
   module V1
     module Cms
       class MetadataController < ::Api::BaseController
+        include MetadataApiHelper
         before_action :find_metadata, only: :show
 
         def index
