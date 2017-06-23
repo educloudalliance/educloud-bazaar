@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170621101342) do
+ActiveRecord::Schema.define(version: 20170623123630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170621101342) do
     t.string  "add_resource_callback_url"
     t.string  "cancel_url"
     t.string  "uid",                       null: false
+    t.string  "context_title",             null: false
     t.index ["uid"], name: "index_cms_sessions_on_uid", unique: true, using: :btree
   end
 

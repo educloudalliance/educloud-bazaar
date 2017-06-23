@@ -5,7 +5,7 @@ RSpec.describe ShoppingCartsController, type: :controller do
   let(:cms_session) { create(:cms_session) }
   let(:shopping_cart) { ShoppingCart.create(cms_sessions_id: cms_session.id) }
   before(:each) do
-    session[:session_id] = cms_session.uid
+    session[:cms_session_id] = cms_session.uid
     session[:shopping_cart_id] = shopping_cart.id
   end
 

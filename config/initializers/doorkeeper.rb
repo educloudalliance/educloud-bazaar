@@ -12,7 +12,7 @@ Doorkeeper.configure do
 
   resource_owner_from_credentials do |_routes|
     if Doorkeeper::Application.where(uid: params[:client_id], secret: params[:client_secret]).exists?
-      account = Acocunt.find_for_database_authentication(email: params[:accountname])
+      account = Account.find_for_database_authentication(email: params[:username])
       if account && account.valid_password?(params[:password])
         account
       else

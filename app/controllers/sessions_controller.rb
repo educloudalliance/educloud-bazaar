@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def show
     cms_session = CmsSession.find_by(uid: params[:session_id])
     if cms_session
-      session[:session_id] = params[:session_id]
+      session[:cms_session_id] = params[:session_id]
       shopping_cart = ShoppingCart.create(cms_sessions_id: cms_session.id)
       session[:shopping_cart_id] = shopping_cart.id
       redirect_to materials_path

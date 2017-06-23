@@ -59,13 +59,21 @@
             <hr>
           </div>
         <% end %>
+        <div class="row text-center">
+          <div class="col-md-2 col-xs-offset-8 text-center margin-bottom-10">
+            <strong>Total <%= "#{@shopping_cart.total.currency.html_entity} #{@shopping_cart.total.to_f}" %></strong>
+          </div>
+        </div>
         <div class="panel-footer">
-          <div class="row text-center">
-            <div class="col-md-2 col-xs-offset-8 text-center">
-              <strong>Total <%= "#{@shopping_cart.total.currency.html_entity} #{@shopping_cart.total.to_f}" %></strong>
+          <div class="row">
+            <div class="col-md-2 col-xs-offset-8">
+              <%= link_to 'Cancel', shopping_cart_cancel_path, class: "btn btn-danger btn-block" %>
             </div>
             <div class="col-md-2">
-              <%= link_to 'Approve', shopping_cart_approve_path, class: "btn btn-success btn-block" %>
+              <%= form_tag @current_session.add_resource_callback_url, authenticity_token: false do %>
+                  <%= hidden_field_tag :params, @resources.map(&:material).to_json %>
+                  <%= submit_tag 'Approve', class: "btn btn-success btn-block" %>
+              <% end %>
             </div>
           </div>
         </div>

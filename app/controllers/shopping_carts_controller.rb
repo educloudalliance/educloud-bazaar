@@ -1,6 +1,7 @@
 class ShoppingCartsController < ApplicationController
   before_action :authenticate_viewer!
   before_action :find_material, only: %i[create destroy]
+  before_action :current_session, only: %i[show cancel]
 
   def create
     current_shopping_cart.add(@material, (rand(20) + 1))
@@ -11,9 +12,9 @@ class ShoppingCartsController < ApplicationController
     @resources = current_shopping_cart.shopping_cart_items.with_material
   end
 
-  def approve
+  def cancel
     current_shopping_cart.clear
-    redirect_to materials_path, notice: 'Successfully approved'
+    redirect_to current_session.cancel_url
   end
 
   def destroy

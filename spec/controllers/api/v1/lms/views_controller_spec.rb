@@ -21,8 +21,8 @@ RSpec.describe Api::V1::Lms::ViewsController, type: :request do
         params: {
           access_token: access_token, resource_uid: resource_uid,
           first_name: 'first_name', last_name: 'last_name',
-          user_id: 'user_id', context_id: 'context_id', role: 'admin',
-          school: 'school', school_id: 'school_id', city: 'city',
+          user_id: 'user_id', context_id: 'context_id', context_title: 'context_title',
+          role: 'admin', school: 'school', school_id: 'school_id', city: 'city',
           city_id: 'city_id'
         }
     end

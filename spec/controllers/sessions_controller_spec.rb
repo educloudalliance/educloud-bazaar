@@ -9,7 +9,7 @@ RSpec.describe SessionsController, type: :controller do
 
     context 'when user loggin in' do
       it 'should save current session uid' do
-        expect(session[:session_id]).to eq(@current_session.uid)
+        expect(session[:cms_session_id]).to eq(@current_session.uid)
       end
       it 'should save current shopping cart' do
         expect(session[:shopping_cart_id]).to eq(ShoppingCart.last.id)

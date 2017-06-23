@@ -22,6 +22,7 @@ end
     material.publisher_data = 'custom payload'
     material.image = File.open(Rails.root.join('db', 'materials', 'ruby.png').to_s)
     material.tag_list = FFaker::Lorem.words
+    material.publisher_url = "#{app.material_url(iteration)}"
     rand(5).times do |meta|
       material.materials_metadata.build(metadata: Metadata.all.sample)
     end

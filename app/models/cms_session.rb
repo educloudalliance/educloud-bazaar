@@ -1,5 +1,6 @@
 class CmsSession < ApplicationRecord
-  validates :first_name, :last_name, :user_id, :context_id, :role, :school, :school_id, :city, :city_id, presence: true
+  validates :first_name, :last_name, :user_id, :context_id, :context_title, :role,
+    :school, :school_id, :city, :city_id, presence: true
 
   before_create :generate_uid
 
