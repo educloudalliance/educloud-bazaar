@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_session
-    @current_session ||= CmsSession.find_by(uid: session[:session_id])
+    @current_session ||= CmsSession.find_by(uid: session[:cms_session_id])
   end
 
   def find_material
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_viewer!
-    if session[:session_id].nil?
+    if session[:cms_session_id].nil?
       reset_session
       render json: { error: 'Not Authorized' }
     end

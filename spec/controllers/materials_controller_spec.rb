@@ -7,7 +7,7 @@ RSpec.describe MaterialsController, type: :controller do
   let(:not_public_product) { create(:product) }
 
   before(:each) do
-    session[:session_id] = cms_session.uid
+    session[:cms_session_id] = cms_session.uid
     session[:shopping_cart_id] = shopping_cart.id
   end
 
@@ -39,7 +39,7 @@ RSpec.describe MaterialsController, type: :controller do
 
     context 'when user fail login' do
       before do
-        get :index, params: { page: 2 }, session: { session_id: nil, shopping_cart_id: nil }
+        get :index, params: { page: 2 }, session: { cms_session_id: nil, shopping_cart_id: nil }
       end
 
       it 'respond with error' do

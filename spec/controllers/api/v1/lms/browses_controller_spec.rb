@@ -11,8 +11,8 @@ RSpec.describe Api::V1::Lms::BrowsesController, type: :request do
       post '/api/v1/lms/browse',
         params: {
           access_token: access_token, first_name: 'first_name', last_name: 'last_name',
-          user_id: user_id, context_id: 'context_id', role: 'admin',
-          school: 'school', school_id: 'school_id', city: 'city', city_id: 'city_id'
+          user_id: user_id, context_id: 'context_id', context_title: 'context_title',
+          role: 'admin', school: 'school', school_id: 'school_id', city: 'city', city_id: 'city_id'
         }
     end
 
@@ -20,7 +20,7 @@ RSpec.describe Api::V1::Lms::BrowsesController, type: :request do
       it 'responses with JSON that contain callback_url and session_id' do
         expect(response).to have_http_status(200)
         expect(JSON(response.body)['success']).to eq(1)
-        expect(JSON(response.body)['browse_url']).to eq(materials_url(session_id: CmsSession.last.uid))
+        expect(JSON(response.body)['browse_url']).to eq(root_url(session_id: CmsSession.last.uid))
       end
     end
 

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :materials, only: %i[index show]
   resource :shopping_cart, only: %i[destroy show create]
-  get :shopping_cart_approve, to: 'shopping_carts#approve'
+  get :shopping_cart_cancel, to: 'shopping_carts#cancel'
   resource :sessions, only: %i[show]
   root 'sessions#show'
 end

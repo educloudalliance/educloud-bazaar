@@ -5,6 +5,7 @@ FactoryGirl.define do
     email { FFaker::Internet.email }
     user_id { SecureRandom.hex(10) }
     context_id { SecureRandom.hex(10) }
+    context_title { FFaker::Lorem.word }
     role { %i[admin teacher student].sample }
     school { FFaker::Education.school }
     school_id { SecureRandom.hex(10) }
