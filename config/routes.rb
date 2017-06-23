@@ -8,7 +8,6 @@ Rails.application.routes.draw do
       namespace :cms do
         resources :materials, only: %i[index show create update destroy]
         resources :metadata, only: %i[index show]
-        resources :apidocs, only: %i[index show]
         resources :products, only: %i[create update show]
         resources :validate, only: %i[index]
       end
@@ -16,6 +15,7 @@ Rails.application.routes.draw do
         resource :browse, only: :create
         resource :view, only: :create
       end
+      resources :apidocs, only: %i[index show]
     end
   end
 
