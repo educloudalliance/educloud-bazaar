@@ -14,7 +14,7 @@ module SwaggerValidateController
       response 200 do
         key :description, 'successful response'
         schema type: :object do
-          property :success, type: :integer
+          property :success, type: :integer, example: 1
           property :data, type: :array do
             items do
               key :'$ref', :User
@@ -27,14 +27,14 @@ module SwaggerValidateController
         schema type: :object do
           property :'Token timeout', type: :array do
             items do
-              property :success, type: :integer, value: 0
+              property :success, type: :integer, example: 0
               property :error, type: :string, example: 401
               property :error_message, type: :string, example: 'Token timeout'
             end
           end
           property :'Token already used', type: :array do
             items do
-              property :success, type: :integer, value: 0
+              property :success, type: :integer, example: 0
               property :error, type: :string, example: 401
               property :error_message, type: :string, example: 'Token already used'
             end

@@ -1,24 +1,24 @@
-module SwaggerBrowsesController
+module SwaggerViewsController
   include Swagger::Blocks
-  swagger_path '/api/v1/lms/browse' do
+  swagger_path '/api/v1/lms/view' do
     operation :post do
-      key :description, 'Browse and select material'
+      key :description, 'Viewing material'
       key :produces, ['application/json']
       key :tags, [
-        'browses'
+        'views'
       ]
       parameter name: :user, in: :body do
         key :description, 'arguments'
         key :required, true
         schema do
-          key :'$ref', :BrowseArgument
+          key :'$ref', :ViewArgument
         end
       end
       response 200 do
         key :description, 'successful response'
         schema type: :object do
           property :success, type: :integer, example: 1
-          property :browse_url, type: :string, example: 'https://bazaar.gov/?session_id=dc05e711-dac9-4b43-acd3-54c34fe397a1'
+          property :browse_url, type: :string, example: 'https://bazaar.gov/validate?token=df0ae5a63ab170f69706301d4d5b0356a0e800108b9e2fed26e36116b88cce28'
         end
       end
     end

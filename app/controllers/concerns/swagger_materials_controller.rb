@@ -34,11 +34,7 @@ module SwaggerMaterialsController
       response 200 do
         key :description, 'successful response'
         schema type: :object do
-          property :data, type: :array do
-            items do
-              key :'$ref', :Material
-            end
-          end
+          key :'$ref', :Material
         end
       end
     end
@@ -59,7 +55,7 @@ module SwaggerMaterialsController
       response 200 do
         key :description, 'successful response'
         schema type: :object do
-          property :success, type: :integer
+          property :success, type: :integer, example: 1
           property :resource_uid, type: :integer
         end
       end
@@ -82,7 +78,7 @@ module SwaggerMaterialsController
       response 200 do
         key :description, 'successful response'
         schema type: :object do
-          property :success, type: :integer
+          property :success, type: :integer, example: 1
           property :resource_uid, type: :integer
         end
       end
@@ -99,7 +95,7 @@ module SwaggerMaterialsController
       response 200 do
         key :description, 'successful response'
         schema type: :object do
-          property :success, type: :integer
+          property :success, type: :integer, example: 1
         end
       end
     end

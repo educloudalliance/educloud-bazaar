@@ -31,6 +31,9 @@ module Api
         tag name: 'browses' do
           key :description, 'Browse and select material operations'
         end
+        tag name: 'views' do
+          key :description, 'Viewing material operations'
+        end
         key :host, 'educloud.com'
         key :basePath, '/'
         key :consumes, ['application/json']
@@ -56,6 +59,7 @@ module Api
         SwaggerValidateController,
         SwaggerUserModel,
         SwaggerBrowsesController,
+        SwaggerViewsController,
         self
       ].freeze
 

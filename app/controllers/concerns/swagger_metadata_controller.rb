@@ -10,7 +10,7 @@ module SwaggerMetadataController
       response 200 do
         key :description, 'successful response'
         schema type: :object do
-          property :success, type: :integer
+          property :success, type: :integer, example: 1
           property :data, type: :array do
             items type: :string
           end
@@ -29,7 +29,7 @@ module SwaggerMetadataController
       response 200 do
         key :description, 'successful response'
         schema type: :object do
-          property :success, type: :integer
+          property :success, type: :integer, example: 1
           property :data, type: :array do
             items type: :string
           end
