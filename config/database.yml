@@ -31,13 +31,3 @@ development: &default
 test:
   <<: *default
   url: <%= ENV['DATABASE_TEST_URL'] || "postgresql://postgres:password@localhost:5432/educloud_test?encoding=utf8&pool=5&timeout=5000" %>
-
-production:
-  <<: *default
-  database: 'educloud_production'
-  username: 'educloud_web'
-  password: 'chive-convict-inatnome'
-
-staging:
-  <<: *default
-  database: 'educloud_production'
