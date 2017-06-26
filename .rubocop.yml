@@ -58,6 +58,9 @@ Metrics/ModuleLength:
   Max: 100
   Exclude:
     - spec/**/*_spec.rb
+    - app/controllers/api/v1/apidocs_controller.rb
+    - app/controllers/concerns/swagger_*_controller.rb
+    - app/models/concerns/swagger_*_model.rb
 Style/ClassAndModuleChildren:
   Exclude:
     - app/models/spree/gateway/own_estonian_gateway.rb
@@ -66,6 +69,9 @@ Metrics/BlockLength:
     - spec/**/*_spec.rb
     - app/controllers/api/v1/defaults.rb
     - app/models/spree/user_decorator.rb
+    - app/controllers/api/v1/apidocs_controller.rb
+    - app/controllers/concerns/swagger_*_controller.rb
+    - app/models/concerns/swagger_*_model.rb
 Metrics/LineLength:
   Enabled: true
   Max: 120
