@@ -48,6 +48,12 @@ gem 'mini_racer'
 # Web server
 gem 'puma'
 
+# Load environment variables
+gem 'dotenv-rails'
+
+# Exception tracker
+gem 'sentry-raven'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
