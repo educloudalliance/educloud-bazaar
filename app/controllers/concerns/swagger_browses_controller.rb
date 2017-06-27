@@ -2,13 +2,13 @@ module SwaggerBrowsesController
   include Swagger::Blocks
   swagger_path '/api/v1/lms/browse' do
     operation :post do
-      key :description, 'Browse and select material'
+      key :summary, 'Browse and select material'
       key :produces, ['application/json']
       key :tags, [
         'browses'
       ]
-      parameter name: :user, in: :body do
-        key :description, 'arguments'
+      parameter name: :body, in: :body do
+        key :description, 'User object for browses and selects material'
         key :required, true
         schema do
           key :'$ref', :BrowseArgument

@@ -2,13 +2,13 @@ module SwaggerValidateController
   include Swagger::Blocks
   swagger_path '/api/v1/cms/validate/{token}' do
     operation :get do
-      key :description, 'Returns user and resource data'
+      key :summary, 'Get user and resource data by token'
       key :produces, ['application/json']
       key :tags, [
         'validate'
       ]
       parameter name: :token, in: :path, type: :string do
-        key :description, 'Bazaar view token'
+        key :description, 'Token of user that needs to be fetched'
         key :required, true
       end
       response 200 do

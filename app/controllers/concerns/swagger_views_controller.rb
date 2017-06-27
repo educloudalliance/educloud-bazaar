@@ -2,13 +2,13 @@ module SwaggerViewsController
   include Swagger::Blocks
   swagger_path '/api/v1/lms/view' do
     operation :post do
-      key :description, 'Viewing material'
+      key :summary, 'Viewing material'
       key :produces, ['application/json']
       key :tags, [
         'views'
       ]
-      parameter name: :user, in: :body do
-        key :description, 'arguments'
+      parameter name: :body, in: :body do
+        key :description, 'User object for views selected material'
         key :required, true
         schema do
           key :'$ref', :ViewArgument

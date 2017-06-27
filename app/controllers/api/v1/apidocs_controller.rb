@@ -45,14 +45,6 @@ module Api
         key :basePath, '/'
         key :consumes, ['application/json']
         key :produces, ['application/json']
-        parameter :publisher_resource_id, name: :publisher_resource_id, in: :path, type: :integer do
-          key :description, 'Unique material identificator publisher_resource_id'
-          key :required, true
-        end
-        parameter :metadata_country, name: :country, in: :path, type: :string do
-          key :description, 'Metadata country'
-          key :required, true
-        end
       end
 
       # A list of all classes that have swagger_* declarations.
