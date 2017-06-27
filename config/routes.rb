@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :accounts
-  use_doorkeeper
+  use_doorkeeper do
+    skip_controllers :applications, :authorized_applications
+  end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   namespace :api do
