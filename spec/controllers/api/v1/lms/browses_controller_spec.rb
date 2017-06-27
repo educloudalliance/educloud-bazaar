@@ -20,7 +20,7 @@ RSpec.describe Api::V1::Lms::BrowsesController, type: :request do
       it 'responses with JSON that contain callback_url and session_id' do
         expect(response).to have_http_status(200)
         expect(JSON(response.body)['success']).to eq(1)
-        expect(JSON(response.body)['browse_url']).to eq(root_url(session_id: CmsSession.last.uid))
+        expect(JSON(response.body)['browse_url']).to eq(sessions_url(id: CmsSession.last.uid))
       end
     end
 

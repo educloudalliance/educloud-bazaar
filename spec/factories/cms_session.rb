@@ -14,5 +14,6 @@ FactoryGirl.define do
     oid { FFaker::Guid.guid }
     add_resource_callback_url { FFaker::Internet.http_url }
     cancel_url { FFaker::Internet.http_url }
+    association :shopping_cart
   end
 end

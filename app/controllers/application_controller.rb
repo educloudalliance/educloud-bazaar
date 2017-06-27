@@ -5,18 +5,24 @@ class ApplicationController < ActionController::Base
     redirect_to materials_path, alert: 'Material not found'
   end
 
+  helper_method :current_cart, :user_sign_in?
+
   protected
 
   def current_session
-    @current_session ||= CmsSession.find_by(uid: session[:cms_session_id])
+    @current_session ||= CmsSession.find_by(id: session[:cms_session_id])
   end
 
   def find_material
     @material = Material.find(params[:id])
   end
 
-  def current_shopping_cart
-    @shopping_cart ||= ShoppingCart.find(session[:shopping_cart_id])
+  def current_cart
+    @shopping_cart ||= current_session.shopping_cart
+  end
+
+  def user_sign_in?
+    current_session
   end
 
   def authenticate_viewer!

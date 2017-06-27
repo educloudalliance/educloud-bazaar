@@ -2,13 +2,12 @@ require 'rails_helper'
 
 RSpec.describe MaterialsController, type: :controller do
   let(:cms_session) { create(:cms_session) }
-  let(:shopping_cart) { ShoppingCart.create(cms_sessions_id: cms_session.id) }
+  let(:shopping_cart) { ShoppingCart.create(cms_session_id: cms_session.id) }
   let(:product) { create(:product) }
   let(:not_public_product) { create(:product) }
 
   before(:each) do
-    session[:cms_session_id] = cms_session.uid
-    session[:shopping_cart_id] = shopping_cart.id
+    session[:cms_session_id] = cms_session.id
   end
 
   describe 'GET #index' do
@@ -37,14 +36,15 @@ RSpec.describe MaterialsController, type: :controller do
       it { should respond_with(200) }
     end
 
-    context 'when user fail login' do
+    context 'when user unauthorized' do
       before do
-        get :index, params: { page: 2 }, session: { cms_session_id: nil, shopping_cart_id: nil }
+        get :index, params: { page: 1 }, session: { cms_session_id: nil }
       end
 
-      it 'respond with error' do
-        expect(JSON(response.body)['error']).to eq('Not Authorized')
+      it 'assigns all materials to @materials' do
+        expect(assigns(:materials)).to eq(Material.by_viewer(nil, nil).order(id: :asc).to_a)
       end
+      it { should respond_with(200) }
     end
   end
 
@@ -59,8 +59,6 @@ RSpec.describe MaterialsController, type: :controller do
     context 'when viewer have license on material' do
       before do
         create(:license, product: product, city_id: cms_session.city_id, school_id: cms_session.school_id)
-        session[:shopping_cart_id] = shopping_cart.id
-
         get :show, params: { id: material.id }
       end
 

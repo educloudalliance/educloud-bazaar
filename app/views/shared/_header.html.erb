@@ -1,13 +1,15 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="collapse navbar-collapse">
+      <% if user_sign_in? %>
       <p class="navbar-text navbar-left">
         <%= link_to shopping_cart_path, class: 'my-cart' do %>
-          <span class="glyphicon glyphicon-shopping-cart"></span>  My cart  <span class="js-cart-count"><%= @cart_items %></span>
+          <span class="glyphicon glyphicon-shopping-cart"></span>  My cart  <span class="js-cart-count"><%= "(#{current_cart.cart_items.size})" %></span>
         <% end %>
       </p>
+      <% end %>
       <p class="navbar-text navbar-right">
-        Logged in as Test user
+        Logged in as <%= user_sign_in? ? 'Test' : "<span class='text-red'>Unauthorized</span>".html_safe %> user
       </p>
     </div>
   </div>

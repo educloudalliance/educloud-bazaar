@@ -4,21 +4,21 @@ class ShoppingCartsController < ApplicationController
   before_action :current_session, only: %i[show cancel]
 
   def create
-    current_shopping_cart.add(@material, (rand(20) + 1))
-    redirect_to :back, cart_items: current_shopping_cart.cart_items.size, notice: 'Successfully added to the cart'
+    current_cart.add(@material, 0) unless current_cart.cart_items.include? @material
+    redirect_to :back, notice: 'Successfully added to the cart'
   end
 
   def show
-    @resources = current_shopping_cart.shopping_cart_items.with_material
+    @resources = current_cart.shopping_cart_items.with_material
   end
 
   def cancel
-    current_shopping_cart.clear
+    current_cart.clear
     redirect_to current_session.cancel_url
   end
 
   def destroy
-    current_shopping_cart.remove(@material, 1)
+    current_cart.remove(@material, 1)
     redirect_to shopping_cart_path, alert: 'Item was removed from cart'
   end
 end
