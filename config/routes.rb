@@ -23,5 +23,5 @@ Rails.application.routes.draw do
   resource :shopping_cart, only: %i[destroy show create]
   get :shopping_cart_cancel, to: 'shopping_carts#cancel'
   resource :sessions, only: %i[show]
-  root 'sessions#show'
+  root 'materials#index'
 end

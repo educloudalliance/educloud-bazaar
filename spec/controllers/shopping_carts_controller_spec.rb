@@ -3,10 +3,9 @@ require 'rails_helper'
 RSpec.describe ShoppingCartsController, type: :controller do
   let(:material) { create(:material) }
   let(:cms_session) { create(:cms_session) }
-  let(:shopping_cart) { ShoppingCart.create(cms_sessions_id: cms_session.id) }
-  before(:each) do
-    session[:cms_session_id] = cms_session.uid
-    session[:shopping_cart_id] = shopping_cart.id
+  let(:shopping_cart) { ShoppingCart.create(cms_session_id: cms_session.id) }
+  before do
+    session[:cms_session_id] = cms_session.id
   end
 
   describe 'Add material to the cart #create' do
@@ -16,7 +15,7 @@ RSpec.describe ShoppingCartsController, type: :controller do
     end
 
     it 'should respond with cart items count and message' do
-      shopping_cart.add(material, (rand(20) + 1))
+      shopping_cart.add(material, 0)
       expect(shopping_cart.cart_items.size).to eq(1)
     end
     it { should set_flash[:notice] }

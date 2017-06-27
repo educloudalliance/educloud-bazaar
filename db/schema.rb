@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170623123630) do
+ActiveRecord::Schema.define(version: 20170626160204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,10 +172,10 @@ ActiveRecord::Schema.define(version: 20170623123630) do
   end
 
   create_table "shopping_carts", force: :cascade do |t|
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "cms_sessions_id"
-    t.index ["cms_sessions_id"], name: "index_shopping_carts_on_cms_sessions_id", using: :btree
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "cms_session_id"
+    t.index ["cms_session_id"], name: "index_shopping_carts_on_cms_session_id", using: :btree
   end
 
   create_table "taggings", force: :cascade do |t|

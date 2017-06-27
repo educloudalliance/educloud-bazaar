@@ -20,7 +20,7 @@ module Api
         def response_browse_url(resource)
           {
             success: 1,
-            browse_url: "#{root_url}?session_id=#{resource.uid}"
+            browse_url: sessions_url(id: resource.uid)
           }
         end
       end

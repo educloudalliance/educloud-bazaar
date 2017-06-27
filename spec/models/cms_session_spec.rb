@@ -14,5 +14,6 @@ RSpec.describe CmsSession, type: :model do
     it { should validate_presence_of :city }
     it { should validate_presence_of :city_id }
     it { should validate_presence_of :context_title }
+    it { should have_one :shopping_cart }
   end
 end
