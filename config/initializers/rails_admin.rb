@@ -52,6 +52,12 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Doorkeeper::Application' do
+    create do
+      exclude_fields :uid, :secret, :created_at, :updated_at
+    end
+  end
+
   config.authorize_with do
     authenticate_or_request_with_http_basic('Login required') do |username, password|
       if ENV['RAILS_ADMIN_LOGIN'].present? && ENV['RAILS_ADMIN_PASSWORD'].present?
