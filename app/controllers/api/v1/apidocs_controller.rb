@@ -16,6 +16,13 @@ module Api
             key :name, 'MIT'
           end
         end
+
+        security_definition :bazaar_auth do
+          key :type, :oauth2
+          key :tokenUrl, 'https://bazaar.samposoftware.com/oauth/token'
+          key :flow, :password
+        end
+
         tag name: 'materials' do
           key :description, 'Materials operations'
         end
@@ -64,9 +71,6 @@ module Api
       ].freeze
 
       def index
-        headers['Access-Control-Allow-Origin'] = '*'
-        headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET'
-        headers['Access-Control-Allow-Headers'] = 'Content-Type, api_key, Authorization'
         render json: Swagger::Blocks.build_root_json(SWAGGERED_CLASSES)
       end
 

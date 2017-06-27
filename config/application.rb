@@ -12,6 +12,15 @@ module Educloud
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    config.middleware.insert_before 0, Rack::Cors do
+      debug true
+      allow do
+        origins '*'
+        resource '/oauth/*', headers: :any, methods: %i[get post delete put patch options]
+        resource '/api/v1/*', headers: :any, methods: %i[get post delete put patch options]
+      end
+    end
+
     logger = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.log_tags = %i[subdomain uuid]
