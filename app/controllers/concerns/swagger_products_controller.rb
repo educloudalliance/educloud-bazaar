@@ -2,13 +2,13 @@ module SwaggerProductsController
   include Swagger::Blocks
   swagger_path '/api/v1/cms/products/{id}' do
     operation :get do
-      key :description, 'Return product by ID'
+      key :summary, 'Find product by ID'
       key :produces, ['application/json']
       key :tags, [
         'products'
       ]
       parameter name: :id, in: :path, type: :integer do
-        key :description, 'Unique product identificator id'
+        key :description, 'ID of product that needs to be fetched'
         key :required, true
       end
       response 200 do
@@ -21,13 +21,13 @@ module SwaggerProductsController
   end
   swagger_path '/api/v1/cms/products' do
     operation :post do
-      key :description, 'Create product'
+      key :summary, 'Add a new product'
       key :produces, ['application/json']
       key :tags, [
         'products'
       ]
-      parameter name: :product, in: :body do
-        key :description, 'product parameters'
+      parameter name: :body, in: :body do
+        key :description, 'Product object that needs to be added'
         key :required, true
         schema do
           key :'$ref', :ProductInput
@@ -48,17 +48,17 @@ module SwaggerProductsController
   end
   swagger_path '/api/v1/cms/products/{id}' do
     operation :put do
-      key :description, 'Update product by ID'
+      key :summary, 'Update an existing product'
       key :produces, ['application/json']
       key :tags, [
         'products'
       ]
       parameter name: :id, in: :path, type: :integer do
-        key :description, 'Unique product identificator id'
+        key :description, 'ID of product that needs to update'
         key :required, true
       end
-      parameter name: :product, in: :body do
-        key :description, 'product parameters'
+      parameter name: :body, in: :body do
+        key :description, 'Updated product object'
         key :required, true
         schema do
           key :'$ref', :ProductInput

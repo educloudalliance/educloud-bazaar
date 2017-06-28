@@ -6,6 +6,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
   let(:material) { create(:material, account: account) }
   let(:not_own_material) { create(:material) }
   let(:publisher_resource_id) { material.publisher_resource_id }
+  let(:material_id) { material.id }
 
   describe 'GET #index' do
     before do
@@ -32,7 +33,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
 
   describe 'GET #show' do
     before do
-      get "/api/v1/cms/materials/#{publisher_resource_id}", params: { access_token: access_token }
+      get "/api/v1/cms/materials/#{material_id}", params: { access_token: access_token }
     end
 
     context 'when request to own meterial' do
@@ -44,7 +45,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
     end
 
     context 'when request to not own meterial' do
-      let(:publisher_resource_id) { not_own_material.publisher_resource_id }
+      let(:material_id) { not_own_material.id }
 
       it 'response with record not found' do
         expect(response).to have_http_status(404)
@@ -108,7 +109,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
 
   describe 'PUT #update' do
     before do
-      put "/api/v1/cms/materials/#{publisher_resource_id}",
+      put "/api/v1/cms/materials/#{material_id}",
         params: { access_token: access_token, name: FFaker::Product.name, language: FFaker::Locale.code }
     end
 
@@ -120,7 +121,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
     end
 
     context 'when request to not own meterial' do
-      let(:publisher_resource_id) { not_own_material.publisher_resource_id }
+      let(:material_id) { not_own_material.id }
 
       it 'response with record not found' do
         expect(response).to have_http_status(404)
@@ -139,7 +140,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
 
   describe 'DELETE #destroy' do
     before do
-      delete "/api/v1/cms/materials/#{publisher_resource_id}", params: { access_token: access_token }
+      delete "/api/v1/cms/materials/#{material_id}", params: { access_token: access_token }
     end
 
     context 'when request to own meterial' do
@@ -150,7 +151,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
     end
 
     context 'when request to not own meterial' do
-      let(:publisher_resource_id) { not_own_material.publisher_resource_id }
+      let(:material_id) { not_own_material.id }
 
       it 'response with record not found' do
         expect(response).to have_http_status(404)

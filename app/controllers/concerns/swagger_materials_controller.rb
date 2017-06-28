@@ -2,7 +2,7 @@ module SwaggerMaterialsController
   include Swagger::Blocks
   swagger_path '/api/v1/cms/materials' do
     operation :get do
-      key :description, 'Returns all materials from the system'
+      key :summary, 'Returns all materials'
       key :produces, ['application/json']
       key :tags, [
         'materials'
@@ -25,12 +25,15 @@ module SwaggerMaterialsController
   end
   swagger_path '/api/v1/cms/materials/{id}' do
     operation :get do
-      key :description, 'Return material by publisher_resource_id'
+      key :summary, 'Find material by ID'
       key :produces, ['application/json']
       key :tags, [
         'materials'
       ]
-      parameter :publisher_resource_id
+      parameter name: :id, in: :path, type: :integer do
+        key :description, 'ID of material to return'
+        key :required, true
+      end
       response 200 do
         key :description, 'successful response'
         schema type: :object do
@@ -41,12 +44,13 @@ module SwaggerMaterialsController
   end
   swagger_path '/api/v1/cms/materials' do
     operation :post do
-      key :description, 'Create material in the system'
+      key :summary, 'Add a new material'
       key :produces, ['application/json']
       key :tags, [
         'materials'
       ]
-      parameter name: :material, in: :body do
+      parameter name: :body, in: :body do
+        key :description, 'Material object that needs to be added'
         key :required, true
         schema do
           key :'$ref', :Material
@@ -56,20 +60,24 @@ module SwaggerMaterialsController
         key :description, 'successful response'
         schema type: :object do
           property :success, type: :integer, example: 1
-          property :resource_uid, type: :integer
+          property :resource_uid, type: :string, example: 'eb5b7565-a3b9-487a-92ef-ed6f86976299'
         end
       end
     end
   end
   swagger_path '/api/v1/cms/materials/{id}' do
     operation :put do
-      key :description, 'Update material in the system'
+      key :summary, 'Update an existing material'
       key :produces, ['application/json']
       key :tags, [
         'materials'
       ]
-      parameter :publisher_resource_id
-      parameter name: :material, in: :body do
+      parameter name: :id, in: :path, type: :integer do
+        key :description, 'ID of material that needs to update'
+        key :required, true
+      end
+      parameter name: :body, in: :body do
+        key :description, 'Updated material object'
         key :required, true
         schema do
           key :'$ref', :MaterialInput
@@ -79,19 +87,22 @@ module SwaggerMaterialsController
         key :description, 'successful response'
         schema type: :object do
           property :success, type: :integer, example: 1
-          property :resource_uid, type: :integer
+          property :resource_uid, type: :string, example: 'eb5b7565-a3b9-487a-92ef-ed6f86976299'
         end
       end
     end
   end
   swagger_path '/api/v1/cms/materials/{id}' do
     operation :delete do
-      key :description, 'Delete material from the system'
+      key :summary, 'Delete material'
       key :produces, ['application/json']
       key :tags, [
         'materials'
       ]
-      parameter :publisher_resource_id
+      parameter name: :id, in: :path, type: :integer do
+        key :description, 'ID of material that needs to delete'
+        key :required, true
+      end
       response 200 do
         key :description, 'successful response'
         schema type: :object do

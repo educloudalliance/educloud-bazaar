@@ -27,7 +27,7 @@ module Api
     end
 
     def find_material
-      @material = current_account.materials.find_by!(publisher_resource_id: params[:id])
+      @material = current_account.materials.find(params[:id])
     end
   end
 end
