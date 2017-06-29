@@ -22,7 +22,7 @@ RailsAdmin.config do |config|
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar true
-  config.included_models = %w[Account Metadata Doorkeeper::Application]
+  config.included_models = %w[Account Material Product License Metadata Doorkeeper::Application]
 
   config.actions do
     dashboard                     # mandatory
