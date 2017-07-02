@@ -1,6 +1,6 @@
-account = Account.where(email: 'carl@bazaar.com').first_or_create! do |item|
+application = Doorkeeper::Application.where(uid: '06E777CD-1DC2-1CDA-6A8E-68B94E413201').first_or_create! do |item|
   item.name = FFaker::Product.product_name
-  item.password = '123456'
+  item.secret = '825d81462ec90220f734af6c6bac5a0e88253d1fa83fb6daecd4f897968bfbdf'
 end
 
 countries = ['global', 'fi', 'ru']
@@ -14,7 +14,7 @@ end
 (1..10).each do |iteration|
   Material.where(publisher_resource_id: iteration).first_or_create! do |material|
     language = FFaker::Locale.code
-    material.account = account
+    material.application = application
     material.name = FFaker::Product.product_name
     material.description = FFaker::Lorem.phrase
     material.language = "#{language.downcase}-#{language}"
@@ -39,9 +39,4 @@ end
 
 Product.find_each do |product|
   FactoryGirl.create(:license, expire_on: 1.year.from_now, product: product)
-end
-
-Doorkeeper::Application.where(uid: '06E777CD-1DC2-1CDA-6A8E-68B94E413201').first_or_create! do |item|
-  item.name = FFaker::Product.product_name
-  item.secret = '825d81462ec90220f734af6c6bac5a0e88253d1fa83fb6daecd4f897968bfbdf'
 end

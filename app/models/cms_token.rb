@@ -1,9 +1,9 @@
 class CmsToken < ApplicationRecord
   belongs_to :material
   belongs_to :cms_session
-  belongs_to :account
+  belongs_to :application, class_name: Doorkeeper::Application
 
-  validates :account, :material, :cms_session, presence: true
+  validates :application, :material, :cms_session, presence: true
 
   before_create :generate_token
   before_create :assign_expire

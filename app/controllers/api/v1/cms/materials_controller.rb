@@ -6,7 +6,7 @@ module Api
         before_action :find_material, only: %i[show update destroy]
 
         def index
-          materials = current_account.materials.paginate(page: params[:page])
+          materials = current_application.materials.paginate(page: params[:page])
 
           if stale?(materials)
             render json: materials, meta: pagination_dict(materials), meta_key: 'pagination'
@@ -18,7 +18,7 @@ module Api
         end
 
         def create
-          new_material = current_account.materials.build(create_params)
+          new_material = current_application.materials.build(create_params)
           new_material.tag_list = params[:tags]
 
           render json: { success: 1, resource_uid: new_material.publisher_resource_id } if new_material.save!

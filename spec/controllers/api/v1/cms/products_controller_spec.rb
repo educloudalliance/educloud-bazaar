@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Cms::ProductsController, type: :request do
-  let(:account) { create :account }
-  let(:access_token) { create(:access_token, resource_owner_id: account.id).token }
+  let(:access_token) { create(:access_token).token }
   let(:materials) { create_list(:material, 3) }
   let(:name) { FFaker::Product.product_name }
   let(:description) { FFaker::Lorem.phrase }

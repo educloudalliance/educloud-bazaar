@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Lms::ViewsController, type: :request do
-  let(:account) { create :account }
-  let(:access_token) { create(:access_token, resource_owner_id: account.id).token }
+  let(:access_token) { create(:access_token).token }
 
   describe 'POST #create' do
     let(:material) do

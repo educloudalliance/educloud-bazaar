@@ -7,8 +7,8 @@ module TokenApiValidation
         'resource_url' => token.material.publisher_url,
         'resource_uid' => token.material.id,
         'bazaar_user_id' => token.cms_session.uid,
-        'organization_name' => token.account.name,
-        'organization_id' => token.account.id
+        'organization_name' => token.application.name,
+        'organization_id' => token.application.id
       }
     ].inject(&:merge)
   end

@@ -1,7 +1,7 @@
 class Material < ApplicationRecord
   acts_as_taggable_on :tags
 
-  belongs_to :account
+  belongs_to :application, class_name: Doorkeeper::Application
   has_many :product_materials, source: :material_id, dependent: :destroy
   has_many :products, through: :product_materials
 

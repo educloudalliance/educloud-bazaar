@@ -22,17 +22,23 @@
 
 ## 2. Authorization
 
-There are  currently one way to authorization through EduCloud API v1.
+There are currently one way to authorization through EduCloud API v1.
 
-By password credentials
+By [client credentials](https://tools.ietf.org/html/rfc6819#section-4.4.4).
 
+In ruby, it would be something like this:
 ~~~~
-require 'oauth2'
+client_id = '4ea1b...'
+client_secret = 'a2982...'
 
-client = OAuth2::Client.new('id',
-                            'secret',
-                            site: "https://educloud.samposoftware.com")
-access_token = client.password.get_token('user@example.com', 'password')
+response = RestClient.post 'https://educloudalliance.apinf.io/oauth/token', {
+  grant_type: 'client_credentials',
+  client_id: client_id,
+  client_secret: client_secret
+}
+
+token = JSON.parse(response)["access_token"]
+# => 'a2982...'
 ~~~~
 
 ## 3. Authentication 
