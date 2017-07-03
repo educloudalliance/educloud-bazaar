@@ -9,7 +9,7 @@ module Api
           cms_token = CmsToken.create(
             cms_session_id: cms_session.id,
             material_id: @material.id,
-            account_id: current_account.id
+            application_id: current_application.id
           )
 
           render json: { success: 1, view_url: "#{@material.publisher_url}?token=#{cms_token.token}" }

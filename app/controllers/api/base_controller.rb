@@ -22,12 +22,12 @@ module Api
 
     before_action :doorkeeper_authorize!
 
-    def current_account
-      Account.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
+    def current_application
+      doorkeeper_token.application
     end
 
     def find_material
-      @material = current_account.materials.find(params[:id])
+      @material = current_application.materials.find(params[:id])
     end
   end
 end

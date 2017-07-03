@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :material do
-    association :account
+    association :application, factory: :oauth_application
     name { FFaker::Product.product_name }
     description { FFaker::Lorem.phrase }
     language { FFaker::Locale.code }

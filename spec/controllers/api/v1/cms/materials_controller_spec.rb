@@ -1,23 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
-  let(:account) { create :account }
-  let(:access_token) { create(:access_token, resource_owner_id: account.id).token }
-  let(:material) { create(:material, account: account) }
+  let(:access_token) { create(:access_token) }
+  let(:token) { access_token.token }
+  let(:application) { access_token.application }
+  let(:material) { create(:material, application: application) }
   let(:not_own_material) { create(:material) }
   let(:publisher_resource_id) { material.publisher_resource_id }
   let(:material_id) { material.id }
 
   describe 'GET #index' do
     before do
-      create_list(:material, 2, account: account)
+      create_list(:material, 2, application: application)
       create_list(:material, 3)
 
-      get '/api/v1/cms/materials', params: { access_token: access_token }
+      get '/api/v1/cms/materials', params: { access_token: token }
     end
 
     context 'when request with wrong access_token' do
-      let(:access_token) { 'fake_token' }
+      let(:token) { 'fake_token' }
 
       it 'responses with JSON with error' do
         expect(response).to have_http_status(401)
@@ -33,7 +34,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
 
   describe 'GET #show' do
     before do
-      get "/api/v1/cms/materials/#{material_id}", params: { access_token: access_token }
+      get "/api/v1/cms/materials/#{material_id}", params: { access_token: token }
     end
 
     context 'when request to own meterial' do
@@ -54,7 +55,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
     end
 
     context 'when request with wrong access_token' do
-      let(:access_token) { 'fake_token' }
+      let(:token) { 'fake_token' }
 
       it 'responses with JSON with error' do
         expect(response).to have_http_status(401)
@@ -68,7 +69,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
     before do
       post '/api/v1/cms/materials',
         params: {
-          access_token: access_token, publisher_resource_id: resource_id,
+          access_token: token, publisher_resource_id: resource_id,
           name: FFaker::Product.name, language: FFaker::Locale.code, description: FFaker::Lorem.paragraph
         }
     end
@@ -90,7 +91,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
     end
 
     context 'when request with wrong access_token' do
-      let(:access_token) { 'fake_token' }
+      let(:token) { 'fake_token' }
 
       it 'responses with JSON with error' do
         expect(response).to have_http_status(401)
@@ -110,7 +111,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
   describe 'PUT #update' do
     before do
       put "/api/v1/cms/materials/#{material_id}",
-        params: { access_token: access_token, name: FFaker::Product.name, language: FFaker::Locale.code }
+        params: { access_token: token, name: FFaker::Product.name, language: FFaker::Locale.code }
     end
 
     context 'when request to own meterial' do
@@ -130,7 +131,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
     end
 
     context 'when request with wrong access_token' do
-      let(:access_token) { 'fake_token' }
+      let(:token) { 'fake_token' }
 
       it 'responses with JSON with error' do
         expect(response).to have_http_status(401)
@@ -140,7 +141,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
 
   describe 'DELETE #destroy' do
     before do
-      delete "/api/v1/cms/materials/#{material_id}", params: { access_token: access_token }
+      delete "/api/v1/cms/materials/#{material_id}", params: { access_token: token }
     end
 
     context 'when request to own meterial' do
@@ -160,7 +161,7 @@ RSpec.describe Api::V1::Cms::MaterialsController, type: :request do
     end
 
     context 'when request with wrong access_token' do
-      let(:access_token) { 'fake_token' }
+      let(:token) { 'fake_token' }
 
       it 'responses with JSON with error' do
         expect(response).to have_http_status(401)

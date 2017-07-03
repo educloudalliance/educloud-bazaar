@@ -3,6 +3,6 @@ FactoryGirl.define do
     token { SecureRandom.urlsafe_base64(50) }
     association :material
     association :cms_session
-    association :account
+    association :application, factory: :oauth_application
   end
 end

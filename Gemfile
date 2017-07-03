@@ -40,9 +40,6 @@ gem 'jquery-rails'
 # API
 gem 'doorkeeper'
 
-# Authentication
-gem 'devise'
-
 gem 'mini_racer'
 
 # Web server

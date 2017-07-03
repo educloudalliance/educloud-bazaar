@@ -10,18 +10,7 @@ Doorkeeper.configure do
     #   User.find_by_id(session[:user_id]) || redirect_to(new_user_session_url)
   end
 
-  resource_owner_from_credentials do |_routes|
-    if Doorkeeper::Application.where(uid: params[:client_id], secret: params[:client_secret]).exists?
-      account = Account.find_for_database_authentication(email: params[:username])
-      if account && account.valid_password?(params[:password])
-        account
-      else
-        false
-      end
-    end
-  end
-
-  # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
+# If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
   # admin_authenticator do
   #   # Put your admin authentication logic here.
   #   # Example implementation:
@@ -33,7 +22,7 @@ Doorkeeper.configure do
 
   # Access token expiration time (default 2 hours).
   # If you want to disable expiration, set this to nil.
-  access_token_expires_in nil
+  #access_token_expires_in nil
 
   # Assign a custom TTL for implicit grants.
   # custom_access_token_expires_in do |oauth_client|
@@ -109,7 +98,7 @@ Doorkeeper.configure do
   #   http://tools.ietf.org/html/rfc6819#section-4.4.2
   #   http://tools.ietf.org/html/rfc6819#section-4.4.3
   #
-  grant_flows %w(client_credentials password)
+  grant_flows %w(client_credentials)
 
   # Under some circumstances you might want to have applications auto-approved,
   # so that the user skips the authorization step.
@@ -121,3 +110,5 @@ Doorkeeper.configure do
   # WWW-Authenticate Realm (default "Doorkeeper").
   # realm "Doorkeeper"
 end
+
+Doorkeeper::Application.send :include, ApplicationExtension
