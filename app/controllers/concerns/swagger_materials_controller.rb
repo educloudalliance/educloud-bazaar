@@ -2,6 +2,9 @@ module SwaggerMaterialsController
   include Swagger::Blocks
   swagger_path '/api/v1/cms/materials' do
     operation :get do
+      security do
+        key :bazaar_auth
+      end
       key :summary, 'Returns all materials'
       key :produces, ['application/json']
       key :tags, [
@@ -25,6 +28,9 @@ module SwaggerMaterialsController
   end
   swagger_path '/api/v1/cms/materials/{id}' do
     operation :get do
+      security do
+        key :bazaar_auth
+      end
       key :summary, 'Find material by ID'
       key :produces, ['application/json']
       key :tags, [
