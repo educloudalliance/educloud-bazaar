@@ -31,7 +31,7 @@ In ruby, it would be something like this:
 client_id = '4ea1b...'
 client_secret = 'a2982...'
 
-response = RestClient.post 'https://educloudalliance.apinf.io/oauth/token', {
+response = RestClient.post 'https://bazaar.educloudalliance.org/oauth/token', {
   grant_type: 'client_credentials',
   client_id: client_id,
   client_secret: client_secret
@@ -48,7 +48,7 @@ There are two ways to authenticate through EduCloud API v1.
 OAuth2 Token (sent in a header or as a parameter)
 
 ~~~~
-$ curl -H "Authorization: Bearer OAUTH-TOKEN" https://educloud.samposoftware.com/api/v1/
+$ curl -H "Authorization: Bearer OAUTH-TOKEN" https://bazaar.educloudalliance.org/api/v1/
 ~~~~
 
 Read more [about OAuth2](http://oauth.net/2/).

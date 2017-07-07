@@ -19,8 +19,8 @@ module Api
 
         security_definition :bazaar_auth do
           key :type, :oauth2
-          key :tokenUrl, 'https://bazaar.samposoftware.com/oauth/token'
-          key :flow, :password
+          key :tokenUrl, 'https://bazaar.educloudalliance.org/oauth/token'
+          key :flow, :application
         end
 
         tag name: 'materials' do
