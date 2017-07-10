@@ -23,6 +23,10 @@ module Api
           key :flow, :application
         end
 
+        security do
+          key :bazaar_auth, []
+        end
+
         tag name: 'materials' do
           key :description, 'Materials operations'
         end
