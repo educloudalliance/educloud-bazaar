@@ -23,8 +23,7 @@ module Api
         end
 
         def views_params
-          params.permit(:first_name, :last_name, :email, :user_id, :context_id, :context_title, :role, :school,
-            :school_id, :city, :city_id, :oid)
+          params.permit(:user_id, :role, :school, :school_id, :city, :city_id, :oid)
         end
       end
     end

@@ -13,8 +13,8 @@ module Api
         private
 
         def cms_sessions_params
-          params.permit(:first_name, :last_name, :email, :user_id, :context_id, :context_title, :role, :school,
-            :school_id, :city, :city_id, :oid, :add_resource_callback_url, :cancel_url)
+          params.permit(:user_id, :role, :school, :school_id, :city, :city_id, :oid,
+            :add_resource_callback_url, :cancel_url)
         end
 
         def response_browse_url(resource)
