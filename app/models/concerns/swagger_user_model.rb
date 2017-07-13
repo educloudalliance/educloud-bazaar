@@ -2,12 +2,7 @@ module SwaggerUserModel
   include Swagger::Blocks
 
   swagger_schema :UserInput do
-    property :first_name, type: :string
-    property :last_name, type: :string
-    property :email, type: :string
     property :user_id, type: :integer
-    property :context_id, type: :integer
-    property :context_title, type: :string
     property :role, type: :string
     property :school, type: :string
     property :school_id, type: :integer
