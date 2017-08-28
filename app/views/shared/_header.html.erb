@@ -7,6 +7,8 @@
         <%= link_to shopping_cart_path, class: 'my-cart' do %>
           <span class="glyphicon glyphicon-shopping-cart"></span>  My cart  <span class="js-cart-count"><%= "(#{current_cart.cart_items.size})" %></span>
         <% end %>
+      <% else %>
+          Start using Bazaar from <a href="https://demo-lms.educloudalliance.org/"> demo-LMS</a>
       <% end %>
       </div>
       <div class="col-md-6 vmiddle text-center">
