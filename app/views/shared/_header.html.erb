@@ -1,16 +1,21 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="collapse navbar-collapse">
-      <% if user_sign_in? %>
-      <p class="navbar-text navbar-left">
+      <div class="row margin-top-10">
+      <div class="col-md-3 vmiddle text-left">
+        <% if user_sign_in? %>
         <%= link_to shopping_cart_path, class: 'my-cart' do %>
           <span class="glyphicon glyphicon-shopping-cart"></span>  My cart  <span class="js-cart-count"><%= "(#{current_cart.cart_items.size})" %></span>
         <% end %>
-      </p>
       <% end %>
-      <p class="navbar-text navbar-right">
+      </div>
+      <div class="col-md-6 vmiddle text-center">
+        This is a demo bazaar to present functionalitys of Educloud Alliance.
+      </div>
+      <div class="col-md-3 vmiddle text-right">
         Logged in as <%= user_sign_in? ? 'Test' : "<span class='text-red'>Unauthorized</span>".html_safe %> user
-      </p>
+      </div>
+      </div>
     </div>
   </div>
 </nav>
