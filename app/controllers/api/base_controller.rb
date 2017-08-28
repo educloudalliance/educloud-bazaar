@@ -13,11 +13,11 @@ module Api
     end
 
     def token_timeout_error
-      render json: { success: 0, error_message: 'Token timeout', error: 401 }, status: 401
+      render json: { success: 0, error_message: 'Token timeout', error: 401 }
     end
 
     def token_used_error
-      render json: { success: 0, error_message: 'Token already used', error: 401 }, status: 401
+      render json: { success: 0, error_message: 'Token already used', error: 401 }
     end
 
     before_action :doorkeeper_authorize!

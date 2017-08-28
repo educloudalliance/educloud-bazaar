@@ -41,7 +41,6 @@ RSpec.describe Api::V1::Cms::ValidateController, type: :request do
       end
 
       it 'responses with JSON with error' do
-        expect(response).to have_http_status(401)
         expect(JSON(response.body)['error_message']).to eq('Token timeout')
       end
     end
@@ -53,7 +52,6 @@ RSpec.describe Api::V1::Cms::ValidateController, type: :request do
       end
 
       it 'responses with JSON with error' do
-        expect(response).to have_http_status(401)
         expect(JSON(response.body)['error_message']).to eq('Token already used')
       end
     end
