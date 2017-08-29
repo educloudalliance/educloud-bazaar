@@ -27,7 +27,7 @@ script:
     bundle exec bundle-audit update;
     bundle exec bundle-audit check;
     fi
-  - if [ $SERVICE == 'brakeman' ]; then bundle exec brakeman; fi
+  - if [ $SERVICE == 'brakeman' ]; then bundle exec brakeman -z --ensure-latest; fi
   - if [ $SERVICE == 'rubocop' ]; then bundle exec rubocop; fi
   - if [ $SERVICE == 'rspec' ]; then
     RAILS_ENV=test bundle exec rake db:migrate --trace;

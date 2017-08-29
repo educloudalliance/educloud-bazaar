@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def show
     cms_session = CmsSession.find_by(uid: params[:id])
     if cms_session
